@@ -1,0 +1,155 @@
+---
+---
+
+<section class="py-20 md:py-32 px-4 md:px-8 bg-black relative z-20 overflow-hidden" id="philosophy-section">
+  <!-- Decorative background glow -->
+  <div class="absolute top-1/4 left-0 w-80 h-80 rounded-full bg-rose/5 blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-1/4 right-0 w-80 h-80 rounded-full bg-gold/5 blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto flex flex-col gap-24 md:gap-36">
+    
+    <!-- Row 1: Left Text Overlapping Right Hot Stone Image -->
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-0 relative">
+      
+      <!-- Text Block (Left) -->
+      <div 
+        class="w-full md:w-[50%] p-8 md:p-10 rounded-2xl glassmorphism z-20 md:translate-x-12 select-none shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold/15"
+        id="philo-card-1"
+      >
+        <span class="text-xs font-montserrat tracking-[0.25em] text-gold uppercase block mb-3">Our Core Philosophy</span>
+        <h3 class="text-2xl md:text-3.5xl font-playfair font-semibold text-white mb-5 leading-tight">
+          Holistic Balance & Healing
+        </h3>
+        <p class="text-sm md:text-base text-white/80 leading-relaxed font-light font-montserrat">
+          At Shirui, our philosophy is rooted in holistic balance. We combine ancient healing traditions with modern wellness practices to restore harmony to your mind, body, and spirit. Every detail, from our serene environment to our bespoke treatments, is curated to ensure a profound sense of well-being.
+        </p>
+      </div>
+
+      <!-- Image Block (Right) -->
+      <div 
+        class="w-full md:w-[60%] h-[300px] md:h-[450px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative group"
+        id="philo-img-1"
+      >
+        <div class="absolute inset-0 bg-black/25 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
+        <img 
+          src="/assets/philosophy-left.jpg" 
+          alt="Hot Stone Massage Ritual" 
+          class="w-full h-full object-cover scale-[1.03] group-hover:scale-[1.08] transition-transform duration-[1.5s] ease-out"
+        />
+      </div>
+
+    </div>
+
+    <!-- Row 2: Right Text Overlapping Left General Massage Image -->
+    <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-0 relative">
+      
+      <!-- Image Block (Left) -->
+      <div 
+        class="w-full md:w-[60%] h-[300px] md:h-[450px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative group"
+        id="philo-img-2"
+      >
+        <div class="absolute inset-0 bg-black/25 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
+        <img 
+          src="/assets/philosophy-right.jpg" 
+          alt="Therapeutic Rejuvenation Session" 
+          class="w-full h-full object-cover scale-[1.03] group-hover:scale-[1.08] transition-transform duration-[1.5s] ease-out"
+        />
+      </div>
+
+      <!-- Text Block (Right) -->
+      <div 
+        class="w-full md:w-[50%] p-8 md:p-10 rounded-2xl glassmorphism z-20 md:-translate-x-12 select-none shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-rose/15"
+        id="philo-card-2"
+      >
+        <span class="text-xs font-montserrat tracking-[0.25em] text-rose-light uppercase block mb-3">Custom Treatment</span>
+        <h3 class="text-2xl md:text-3.5xl font-playfair font-semibold text-white mb-5 leading-tight">
+          Bespoke Wellness Journeys
+        </h3>
+        <p class="text-sm md:text-base text-white/80 leading-relaxed font-light font-montserrat">
+          We believe that true rejuvenation is deeply personal. Our expert therapists customize each session to address your unique needs, using premium natural oils, warm botanical extracts, and intentional touch. Step into a sanctuary where time stands still, and allow us to guide you back to a state of absolute renewal.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parallax scroll effects for desktop (screens wider than md)
+    if (window.innerWidth >= 768) {
+      // Row 1 Parallax
+      gsap.fromTo('#philo-card-1', 
+        { y: 50 },
+        { 
+          y: -50,
+          scrollTrigger: {
+            trigger: '#philosophy-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+      
+      gsap.fromTo('#philo-img-1', 
+        { y: -30 },
+        { 
+          y: 30,
+          scrollTrigger: {
+            trigger: '#philosophy-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+
+      // Row 2 Parallax
+      gsap.fromTo('#philo-card-2', 
+        { y: 60 },
+        { 
+          y: -60,
+          scrollTrigger: {
+            trigger: '#philo-img-2',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+      
+      gsap.fromTo('#philo-img-2', 
+        { y: -20 },
+        { 
+          y: 20,
+          scrollTrigger: {
+            trigger: '#philo-img-2',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+    } else {
+      // Simple fade up on mobile scroll
+      gsap.from('#philo-card-1, #philo-img-1, #philo-card-2, #philo-img-2', {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: '#philosophy-section',
+          start: 'top 80%',
+        }
+      });
+    }
+  });
+</script>

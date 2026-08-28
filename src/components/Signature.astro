@@ -1,0 +1,138 @@
+---
+---
+
+<section class="py-20 md:py-32 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="signature-section">
+  <!-- Decorative background elements -->
+  <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-rose/5 blur-[120px] pointer-events-none"></div>
+  <div class="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-gold/5 blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-16 md:mb-24 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-rose-light uppercase block mb-3">Signature Experience</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Signature Shirui Treatments
+      </h2>
+      <div class="w-16 h-[1.5px] bg-rose mx-auto mt-6"></div>
+    </div>
+
+    <!-- Main Showcase Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      
+      <!-- Left: Floating Oyster Pearl Shell Image -->
+      <div class="flex justify-center relative select-none" id="sig-left">
+        <!-- Pulse glow behind shell -->
+        <div class="absolute w-60 h-60 md:w-80 md:h-80 rounded-full bg-rose/10 blur-[80px] -z-10 animate-pulse"></div>
+        
+        <!-- Large Pearl Shell Frame -->
+        <div class="w-72 h-72 md:w-[400px] md:h-[400px] rounded-2xl overflow-hidden border border-gold/20 bg-dark-card shadow-[0_15px_45px_rgba(236,72,153,0.15)] flex items-center justify-center relative animate-float">
+          <img 
+            src="/assets/signature-pearl.jpg" 
+            alt="Open pearl oyster shell with glowing pearl" 
+            class="w-full h-full object-cover scale-[1.08]"
+          />
+        </div>
+      </div>
+
+      <!-- Right: Detailed Info & Micro Gallery -->
+      <div class="flex flex-col select-none" id="sig-right">
+        <span class="text-xs font-montserrat tracking-[0.2em] text-gold uppercase block mb-2">Exquisite Ritual</span>
+        <h3 class="text-2.5xl md:text-3.5xl font-playfair font-semibold text-white mb-6 leading-tight">
+          Aura Cleansing with Pearl Powder
+        </h3>
+        
+        <!-- Philosophy Text -->
+        <p class="text-sm md:text-base text-white/80 leading-relaxed font-light font-montserrat mb-8">
+          Indulge in our most exquisite signature ritual. We utilize finely milled, radiant pearl powder for deep exfoliation, hydration, and luminous aura cleansing. This ancient treatment restores skin elasticity, promotes relaxation, and leaves you with a profound inner and outer glow.
+        </p>
+
+        <!-- Supporting Images Row (Micro Gallery) -->
+        <div class="flex items-center gap-4 md:gap-6 mt-2">
+          <!-- Thumbnail 1 (Hands Application) -->
+          <div class="flex flex-col items-center gap-2 group">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-white/10 group-hover:border-gold/30 transition-colors duration-500 bg-black">
+              <img 
+                src="/assets/signature-hands.jpg" 
+                alt="Applying pearl powder to hands" 
+                class="w-full h-full object-cover scale-[1.1] group-hover:scale-125 transition-transform duration-500"
+              />
+            </div>
+            <span class="text-[9px] font-montserrat tracking-[0.1em] text-white/50 uppercase text-center mt-1">Application</span>
+          </div>
+
+          <!-- Thumbnail 2 (Facial Mask) -->
+          <div class="flex flex-col items-center gap-2 group">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-white/10 group-hover:border-rose/30 transition-colors duration-500 bg-black">
+              <img 
+                src="/assets/service-4.jpg" 
+                alt="Gold facial skin treatment" 
+                class="w-full h-full object-cover scale-[1.1] group-hover:scale-125 transition-transform duration-500"
+              />
+            </div>
+            <span class="text-[9px] font-montserrat tracking-[0.1em] text-white/50 uppercase text-center mt-1">Exfoliation</span>
+          </div>
+
+          <!-- Thumbnail 3 (Client Relaxation) -->
+          <div class="flex flex-col items-center gap-2 group">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-white/10 group-hover:border-gold/30 transition-colors duration-500 bg-black">
+              <img 
+                src="/assets/philosophy-right.jpg" 
+                alt="Relaxing spa experience" 
+                class="w-full h-full object-cover scale-[1.1] group-hover:scale-125 transition-transform duration-500"
+              />
+            </div>
+            <span class="text-[9px] font-montserrat tracking-[0.1em] text-white/50 uppercase text-center mt-1">Glow</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Premium floating animation */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Fade up left side (shell)
+    gsap.from('#sig-left', {
+      opacity: 0,
+      x: -40,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '#signature-section',
+        start: 'top 75%',
+      }
+    });
+
+    // Fade up right side (content & thumbs)
+    gsap.from('#sig-right', {
+      opacity: 0,
+      x: 40,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '#signature-section',
+        start: 'top 75%',
+      }
+    });
+  });
+</script>

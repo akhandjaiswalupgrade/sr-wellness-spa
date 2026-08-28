@@ -1,0 +1,250 @@
+---
+---
+
+<section class="relative w-full h-[90vh] md:h-screen flex flex-col items-center justify-center overflow-hidden bg-black select-none" id="hero-section">
+  
+  <!-- Full-Screen 3D Parallax Canvas -->
+  <div class="absolute inset-0 z-0">
+    <canvas id="hero-canvas" class="w-full h-full block opacity-0 transition-opacity duration-1000"></canvas>
+  </div>
+  
+  <!-- Subtle Vignette & Dark Overlay for Text Legibility -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/60 z-10 pointer-events-none"></div>
+
+  <!-- Hero Content Overlay (Tagline & Booking) -->
+  <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20" id="hero-content">
+    
+    <!-- Animated taglines word by word -->
+    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.2em] font-semibold text-white leading-tight mb-8 md:mb-12 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]" id="hero-banner-title">
+      <span class="hero-word opacity-0 inline-block transform translate-y-4">RELAX.</span>
+      <span class="hero-word opacity-0 inline-block transform translate-y-4 ml-3 md:ml-6 text-rose-light">REJUVENATE.</span>
+      <span class="hero-word opacity-0 inline-block transform translate-y-4 ml-3 md:ml-6 text-gold">RENEW.</span>
+    </h2>
+
+    <!-- Glowing booking button (Cyan-Blue theme matching the pool) -->
+    <div class="opacity-0 transform translate-y-6" id="hero-booking-container">
+      <button 
+        class="open-booking-btn relative px-10 py-3 md:px-14 md:py-4 rounded-full font-montserrat font-bold tracking-[0.25em] text-xs md:text-sm text-gold-light uppercase transition-all duration-500 overflow-hidden group shadow-[0_0_35px_rgba(14,165,233,0.3)] hover:scale-105"
+        style="background: linear-gradient(135deg, rgba(12,12,12,0.95), rgba(20,20,20,0.98)); border: 2px solid #d4af37;"
+      >
+        <!-- Cyan Blue glow core matching the pool -->
+        <span class="absolute inset-0 bg-gradient-to-r from-spaBlue/40 to-rose/10 opacity-60 blur-lg group-hover:opacity-100 transition-opacity duration-500"></span>
+        
+        <!-- Hover sliding gold glare -->
+        <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 group-hover:left-[150%] transition-all duration-1000 ease-out"></span>
+        
+        <!-- Button content -->
+        <span class="relative z-10 flex items-center gap-3">
+          <span class="text-gold animate-pulse">&bull;</span>
+          BOOKING
+          <span class="text-gold animate-pulse">&bull;</span>
+        </span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+    <span class="text-[9px] font-montserrat tracking-[0.3em] uppercase text-gold">Explore</span>
+    <div class="w-5 h-8 rounded-full border border-gold/40 flex justify-center py-1">
+      <div class="w-1 h-1.5 bg-gold rounded-full animate-bounce"></div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  import * as THREE from 'three';
+  import { gsap } from 'gsap';
+
+  class HeroParallax {
+    canvas: HTMLCanvasElement;
+    renderer: THREE.WebGLRenderer;
+    scene: THREE.Scene;
+    camera: THREE.PerspectiveCamera;
+    plane: THREE.Mesh | null;
+    textureLoader: THREE.TextureLoader;
+    width: number;
+    height: number;
+    mouseX: number;
+    mouseY: number;
+    targetMouseX: number;
+    targetMouseY: number;
+    scrollOffset: number;
+
+    constructor() {
+      this.canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+      if (!this.canvas) return;
+
+      this.width = this.canvas.clientWidth;
+      this.height = this.canvas.clientHeight;
+
+      this.mouseX = 0;
+      this.mouseY = 0;
+      this.targetMouseX = 0;
+      this.targetMouseY = 0;
+      this.scrollOffset = 0;
+
+      this.renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        antialias: true,
+        powerPreference: "high-performance"
+      });
+      this.renderer.setSize(this.width, this.height, false);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      this.scene = new THREE.Scene();
+
+      this.camera = new THREE.PerspectiveCamera(42, this.width / this.height, 0.1, 1000);
+      this.camera.position.z = 7.5;
+
+      this.plane = null;
+      this.textureLoader = new THREE.TextureLoader();
+
+      this.init();
+      this.setupEvents();
+      this.animate();
+      this.introAnimation();
+    }
+
+    init() {
+      // Restore the widescreen 16:9 pool and cityscape image
+      this.textureLoader.load('/assets/hero-bg.jpg', (texture) => {
+        texture.minFilter = THREE.LinearFilter;
+        texture.generateMipmaps = false;
+
+        const aspect = texture.image.width / texture.image.height;
+        const scaleFactor = 1.2;
+        let w = 7.5 * aspect;
+        let h = 7.5;
+
+        const geometry = new THREE.PlaneGeometry(w * scaleFactor, h * scaleFactor);
+        const material = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.FrontSide
+        });
+
+        this.plane = new THREE.Mesh(geometry, material);
+        this.scene.add(this.plane);
+
+        this.canvas.classList.remove('opacity-0');
+        this.onResize();
+      });
+    }
+
+    setupEvents() {
+      window.addEventListener('mousemove', (e) => {
+        this.targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        this.targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+      });
+
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        this.scrollOffset = scrolled * 0.004;
+      });
+
+      window.addEventListener('resize', this.onResize.bind(this));
+    }
+
+    onResize() {
+      this.width = this.canvas.clientWidth;
+      this.height = this.canvas.clientHeight;
+
+      this.renderer.setSize(this.width, this.height, false);
+
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+
+      if (this.plane && this.plane.material) {
+        const texture = (this.plane.material as THREE.MeshBasicMaterial).map;
+        if (texture && texture.image) {
+          const imageAspect = texture.image.width / texture.image.height;
+          const canvasAspect = this.width / this.height;
+          
+          let planeW = 7.5;
+          let planeH = 7.5;
+
+          if (canvasAspect > imageAspect) {
+            planeW = 7.5 * canvasAspect;
+            planeH = planeW / imageAspect;
+          } else {
+            planeH = 7.5;
+            planeW = planeH * imageAspect;
+          }
+
+          const scaleFactor = 1.2;
+          this.plane.scale.set(
+            (planeW * scaleFactor) / (7.5 * imageAspect), 
+            (planeH * scaleFactor) / 7.5, 
+            1
+          );
+        }
+      }
+    }
+
+    animate() {
+      requestAnimationFrame(this.animate.bind(this));
+
+      this.mouseX += (this.targetMouseX - this.mouseX) * 0.05;
+      this.mouseY += (this.targetMouseY - this.mouseY) * 0.05;
+
+      if (this.plane) {
+        this.plane.rotation.y = this.mouseX * 0.045;
+        this.plane.rotation.x = -this.mouseY * 0.03;
+        this.plane.position.x = this.mouseX * 0.2;
+        this.plane.position.y = (this.mouseY * 0.1) - this.scrollOffset;
+      }
+
+      this.renderer.render(this.scene, this.camera);
+    }
+
+    introAnimation() {
+      const tl = gsap.timeline();
+
+      tl.to('.hero-word:nth-child(1)', {
+        opacity: 1,
+        y: 0,
+        scale: 1.1,
+        duration: 0.6,
+        ease: 'back.out(2)'
+      })
+      .to('.hero-word:nth-child(1)', {
+        scale: 1.0,
+        duration: 0.15
+      })
+      .to('.hero-word:nth-child(2)', {
+        opacity: 1,
+        y: 0,
+        scale: 1.1,
+        duration: 0.6,
+        ease: 'back.out(2)'
+      }, '+=0.1')
+      .to('.hero-word:nth-child(2)', {
+        scale: 1.0,
+        duration: 0.15
+      })
+      .to('.hero-word:nth-child(3)', {
+        opacity: 1,
+        y: 0,
+        scale: 1.1,
+        duration: 0.6,
+        ease: 'back.out(2)'
+      }, '+=0.1')
+      .to('.hero-word:nth-child(3)', {
+        scale: 1.0,
+        duration: 0.15
+      })
+      .to('#hero-booking-container', {
+        opacity: 1,
+        y: 0,
+        duration: 1.0,
+        ease: 'power3.out'
+      }, '-=0.3');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new HeroParallax();
+  });
+</script>

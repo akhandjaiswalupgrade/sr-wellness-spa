@@ -1,0 +1,126 @@
+---
+const faqs = [
+  {
+    q: "What are your operating hours and do I need to book in advance?",
+    a: "We are open daily from 9:00 AM to 9:00 PM. While we accommodate same-day appointments when therapists are available, we highly recommend booking in advance through our online Booking System, phone, or WhatsApp to guarantee your preferred slot."
+  },
+  {
+    q: "What should I wear for my treatment session?",
+    a: "We provide clean, hygienic disposable undergarments, luxury robes, slippers, and towels for all body massages and skin treatments. For Hammam and steam rituals, you are welcome to bring a swimsuit, though wrapping towels are also provided."
+  },
+  {
+    q: "Are your oils organic and safe for sensitive skin?",
+    a: "Yes, we exclusively use premium, 100% organic cold-pressed base oils (such as sweet almond, sesame, and virgin coconut) blended with pure therapeutic-grade botanical extracts. Please inform our concierge of any skin allergies during booking."
+  },
+  {
+    q: "Can I customize the pressure of my body massage?",
+    a: "Absolutely. Rejuvenation is highly personal. Our certified therapists will consult with you before the session to align on your preferred pressure depth (from soft lymphatic drainage to firm myofascial trigger-point release)."
+  },
+  {
+    q: "What is your cancellation and rescheduling policy?",
+    a: "We understand plans change. You can cancel or reschedule your reservation free of charge up to 3 hours before your scheduled appointment time by contacting our WhatsApp concierge."
+  }
+];
+---
+
+<section class="py-20 md:py-32 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="faq">
+  <div class="absolute top-1/2 left-0 w-80 h-80 bg-gold/5 blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-16 md:mb-24 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Sanctuary Queries</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Frequently Asked Questions
+      </h2>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="flex flex-col gap-4 select-none">
+      {faqs.map((faq, index) => (
+        <div 
+          class="faq-item rounded-2xl border border-white/5 bg-dark-card/50 transition-all duration-300 hover:border-gold/15 overflow-hidden"
+          id={`faq-item-${index}`}
+        >
+          <!-- Question Bar -->
+          <button 
+            class="faq-trigger w-full flex items-center justify-between p-5 text-left focus:outline-none"
+            aria-expanded="false"
+          >
+            <span class="text-xs md:text-sm font-montserrat font-bold text-white uppercase tracking-wider pr-4">
+              {faq.q}
+            </span>
+            <!-- Gold arrow icon -->
+            <svg 
+              class="w-4 h-4 text-gold transform transition-transform duration-500 shrink-0" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <!-- Answer Box (Hidden by default using heights) -->
+          <div 
+            class="faq-content max-h-0 overflow-hidden opacity-0 transition-all duration-500 ease-out"
+          >
+            <div class="p-5 pt-0 border-t border-white/5 mt-1 text-[11px] md:text-xs text-white/60 leading-relaxed font-light font-montserrat">
+              {faq.a}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.faq-item');
+
+    items.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger') as HTMLButtonElement;
+      const content = item.querySelector('.faq-content') as HTMLDivElement;
+      const arrow = item.querySelector('svg')!;
+
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close all other FAQs first (Accordion behavior)
+        items.forEach(otherItem => {
+          if (otherItem !== item) {
+            const otherTrigger = otherItem.querySelector('.faq-trigger') as HTMLButtonElement;
+            const otherContent = otherItem.querySelector('.faq-content') as HTMLDivElement;
+            const otherArrow = otherItem.querySelector('svg')!;
+
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            otherContent.style.maxHeight = '0';
+            otherContent.classList.replace('opacity-100', 'opacity-0');
+            otherArrow.classList.remove('rotate-180');
+            otherItem.classList.replace('border-gold/15', 'border-white/5');
+          }
+        });
+
+        // Toggle clicked FAQ
+        if (isExpanded) {
+          trigger.setAttribute('aria-expanded', 'false');
+          content.style.maxHeight = '0';
+          content.classList.replace('opacity-100', 'opacity-0');
+          arrow.classList.remove('rotate-180');
+          item.classList.replace('border-gold/15', 'border-white/5');
+        } else {
+          trigger.setAttribute('aria-expanded', 'true');
+          // Set max-height to scroll height to let browser animate it perfectly
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          content.classList.replace('opacity-0', 'opacity-100');
+          arrow.classList.add('rotate-180');
+          item.classList.replace('border-white/5', 'border-gold/15');
+        }
+      });
+    });
+  });
+</script>

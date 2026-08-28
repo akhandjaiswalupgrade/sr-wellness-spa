@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Philosophy from '../components/Philosophy.astro';
+import Services from '../components/Services.astro';
+import Signature from '../components/Signature.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Gallery from '../components/Gallery.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import BookingModal from '../components/BookingModal.astro';
+---
+
+<Layout>
+  <!-- Brand Header & Sticky Navbar -->
+  <Header />
+
+  <!-- Hero Section with Widescreen 3D Window Parallax -->
+  <Hero />
+
+  <main class="relative overflow-hidden">
+    <!-- Ambient luxury background glow blobs (alternating rose and gold) -->
+    <div class="absolute top-[8%] left-[-10%] w-[350px] h-[350px] bg-rose/5 rounded-full blur-[120px] pointer-events-none z-10"></div>
+    <div class="absolute top-[25%] right-[-10%] w-[400px] h-[400px] bg-gold/5 rounded-full blur-[140px] pointer-events-none z-10"></div>
+    <div class="absolute top-[45%] left-[-15%] w-[450px] h-[450px] bg-rose/5 rounded-full blur-[150px] pointer-events-none z-10"></div>
+    <div class="absolute top-[65%] right-[-10%] w-[350px] h-[350px] bg-gold/5 rounded-full blur-[120px] pointer-events-none z-10"></div>
+    <div class="absolute top-[85%] left-[-10%] w-[400px] h-[400px] bg-rose/5 rounded-full blur-[140px] pointer-events-none z-10"></div>
+
+    <!-- About Us Editorial Section -->
+    <div id="about" class="scroll-mt-24">
+      <About />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Services Philosophy Cascading Parallax Overlaps -->
+    <div id="philosophy">
+      <Philosophy />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Premium Services 3D Floating Grid -->
+    <div id="services" class="scroll-mt-24">
+      <Services />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Signature Aura Cleansing Showcase -->
+    <div id="signature" class="scroll-mt-24">
+      <Signature />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Guest Reviews Testimonials Grid -->
+    <div id="testimonials">
+      <Testimonials />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Teardrop Symmetrical Gallery & Fluid Water shader -->
+    <div id="gallery" class="scroll-mt-24">
+      <Gallery />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Interactive FAQ Accordions -->
+    <div id="faq" class="scroll-mt-24">
+      <FAQ />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Dark Map & Business Contacts -->
+    <div id="contact" class="scroll-mt-24">
+      <Contact />
+    </div>
+  </main>
+
+  <!-- Global Multi-step Booking Modal Simulator -->
+  <BookingModal />
+</Layout>

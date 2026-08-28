@@ -1,0 +1,310 @@
+---
+---
+
+<div id="booking-modal-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-all duration-500 select-none px-4">
+  
+  <!-- Booking Card -->
+  <div 
+    class="w-full max-w-xl rounded-2xl glassmorphism border border-gold/15 p-6 md:p-8 relative shadow-[0_20px_50px_rgba(212,175,55,0.1)] transform scale-95 transition-all duration-500 max-h-[90vh] overflow-y-auto"
+    id="booking-card"
+  >
+    <!-- Close Button -->
+    <button id="booking-close-btn" class="absolute top-4 right-4 text-white/50 hover:text-gold transition-colors duration-300 p-1.5 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Modal Header -->
+    <div class="text-center mb-6">
+      <span class="text-[10px] font-montserrat tracking-[0.25em] text-gold uppercase block mb-1">Shirui Concierge</span>
+      <h3 class="text-2xl font-playfair font-semibold text-white tracking-wider">Book Your Sanctuary</h3>
+      <div class="w-12 h-[1px] bg-gold/30 mx-auto mt-3"></div>
+    </div>
+
+    <!-- STEP 1: Treatment Selection -->
+    <div class="booking-step block" id="step-1">
+      <p class="text-xs font-montserrat text-white/70 mb-4 text-center">1. Select Your Treatment Ritual:</p>
+      <div class="flex flex-col gap-2.5 max-h-[250px] overflow-y-auto pr-1 select-none">
+        {[
+          "Ayurvedic Harmony Massage",
+          "Deep Tissue Therapeutic",
+          "Hot Stone Ritual",
+          "Anti-Aging Gold Facial",
+          "Couples Serenity Package",
+          "Turkish Hammam",
+          "Aura Cleansing with Pearl Powder (Signature)"
+        ].map((treatment) => (
+          <label class="flex items-center gap-3 p-3.5 rounded-xl border border-white/5 bg-black/40 hover:border-gold/30 transition-all duration-300 cursor-pointer group">
+            <input type="radio" name="booking-treatment" value={treatment} class="accent-gold w-4 h-4 shrink-0" />
+            <span class="text-xs font-montserrat text-white/80 group-hover:text-white transition-colors">{treatment}</span>
+          </label>
+        ))}
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button id="to-step-2" class="px-8 py-2.5 rounded-full font-montserrat font-bold tracking-widest text-[10px] text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300">
+          Next Step
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Date & Time -->
+    <div class="booking-step hidden" id="step-2">
+      <p class="text-xs font-montserrat text-white/70 mb-4 text-center">2. Choose Your Date & Time Slot:</p>
+      <div class="flex flex-col gap-5">
+        <!-- Date Selector -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-montserrat uppercase tracking-wider text-gold">Appointment Date</label>
+          <input 
+            type="date" 
+            id="booking-date" 
+            class="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-xs font-montserrat text-white focus:border-gold focus:outline-none" 
+            min={new Date().toISOString().split('T')[0]} 
+            required 
+          />
+        </div>
+        
+        <!-- Time Slot Selector -->
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-montserrat uppercase tracking-wider text-gold">Available Time Slots</label>
+          <div class="grid grid-cols-3 gap-2.5">
+            {["10:00 AM", "12:00 PM", "02:00 PM", "04:00 PM", "06:00 PM", "08:00 PM"].map((time) => (
+              <button 
+                type="button" 
+                class="time-slot-btn py-2.5 rounded-lg border border-white/5 bg-black/40 hover:border-gold/30 text-[10px] font-montserrat tracking-widest text-white/80 transition-all duration-300"
+                data-time={time}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+          <input type="hidden" id="booking-selected-time" value="" />
+        </div>
+      </div>
+
+      <div class="mt-8 flex justify-between">
+        <button id="back-to-1" class="px-6 py-2.5 rounded-full border border-white/15 hover:border-white/35 font-montserrat font-bold tracking-widest text-[10px] text-white uppercase transition-all duration-300">
+          Back
+        </button>
+        <button id="to-step-3" class="px-8 py-2.5 rounded-full font-montserrat font-bold tracking-widest text-[10px] text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300">
+          Next Step
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Contact Details -->
+    <div class="booking-step hidden" id="step-3">
+      <p class="text-xs font-montserrat text-white/70 mb-4 text-center">3. Guest Information:</p>
+      <form id="booking-form" class="flex flex-col gap-4">
+        <!-- Name -->
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-montserrat uppercase tracking-wider text-gold">Full Name</label>
+          <input type="text" id="booking-name" placeholder="Enter your full name" class="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-xs font-montserrat text-white focus:border-gold focus:outline-none" required />
+        </div>
+        
+        <!-- Phone -->
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-montserrat uppercase tracking-wider text-gold">WhatsApp Phone</label>
+          <input type="tel" id="booking-phone" placeholder="Enter your contact number" class="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-xs font-montserrat text-white focus:border-gold focus:outline-none" required />
+        </div>
+        
+        <!-- Notes -->
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-montserrat uppercase tracking-wider text-gold">Special Requests (Optional)</label>
+          <textarea id="booking-notes" rows="2.5" placeholder="Let us know of any health concerns, therapist preferences, or custom requirements..." class="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-xs font-montserrat text-white focus:border-gold focus:outline-none resize-none"></textarea>
+        </div>
+      </form>
+
+      <div class="mt-8 flex justify-between">
+        <button id="back-to-2" class="px-6 py-2.5 rounded-full border border-white/15 hover:border-white/35 font-montserrat font-bold tracking-widest text-[10px] text-white uppercase transition-all duration-300">
+          Back
+        </button>
+        <button id="confirm-booking" class="px-8 py-2.5 rounded-full font-montserrat font-bold tracking-widest text-[10px] text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+          Confirm Ritual
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 4: SUCCESS TICKET -->
+    <div class="booking-step hidden" id="step-success">
+      <div class="border border-gold/30 rounded-xl bg-gold/5 p-5 md:p-6 text-center shadow-inner relative overflow-hidden select-none">
+        <!-- Shine overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 animate-pulse"></div>
+
+        <svg class="w-12 h-12 text-gold mx-auto mb-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke-width="1.2"></circle>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4"></path>
+        </svg>
+
+        <h4 class="text-lg font-playfair font-semibold text-white tracking-widest uppercase mb-1">Reservation Requested</h4>
+        <span class="text-[9px] font-montserrat tracking-[0.2em] text-gold uppercase block mb-5">Shirui Sanctuary Voucher</span>
+        
+        <!-- Summary details card -->
+        <div class="border-t border-b border-gold/15 py-4 flex flex-col gap-2.5 text-xs text-left max-w-sm mx-auto font-montserrat">
+          <div class="flex justify-between"><span class="text-white/40">Treatment:</span><span class="text-white font-medium" id="val-treatment">Ayurvedic Harmony</span></div>
+          <div class="flex justify-between"><span class="text-white/40">Date:</span><span class="text-white font-medium" id="val-date">2026-08-28</span></div>
+          <div class="flex justify-between"><span class="text-white/40">Time Slot:</span><span class="text-gold font-bold" id="val-time">02:00 PM</span></div>
+          <div class="flex justify-between"><span class="text-white/40">Guest:</span><span class="text-white font-medium text-right max-w-[200px] truncate" id="val-name">Guest Name</span></div>
+        </div>
+
+        <p class="text-[10px] text-white/50 leading-relaxed font-light mt-5 max-w-xs mx-auto">
+          Our sanctuary concierge will contact you via WhatsApp shortly to finalize and confirm your appointment. Thank you.
+        </p>
+      </div>
+
+      <div class="mt-6 flex justify-center">
+        <button id="booking-done-btn" class="px-8 py-2.5 rounded-full font-montserrat font-bold tracking-widest text-[10px] text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300">
+          Close Window
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('booking-modal-overlay')!;
+    const card = document.getElementById('booking-card')!;
+    const closeBtn = document.getElementById('booking-close-btn')!;
+    
+    const steps = {
+      1: document.getElementById('step-1')!,
+      2: document.getElementById('step-2')!,
+      3: document.getElementById('step-3')!,
+      success: document.getElementById('step-success')!
+    };
+
+    let selectedTime = "";
+
+    // Toggle overlay visibility (supports optional preselected treatment value)
+    function openModal(preselectedTreatment?: string | null) {
+      goToStep(1);
+      
+      selectedTime = "";
+      document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('border-gold', 'bg-gold/10'));
+      (document.getElementById('booking-selected-time') as HTMLInputElement).value = "";
+      (document.getElementById('booking-name') as HTMLInputElement).value = "";
+      (document.getElementById('booking-phone') as HTMLInputElement).value = "";
+      (document.getElementById('booking-notes') as HTMLTextAreaElement).value = "";
+
+      // Apply smart selector mapping if called from a catalog card
+      if (preselectedTreatment) {
+        const radio = document.querySelector(`input[name="booking-treatment"][value="${preselectedTreatment}"]`) as HTMLInputElement;
+        if (radio) {
+          radio.checked = true;
+        }
+      } else {
+        // Fallback to check the first option by default
+        const radios = document.querySelectorAll('input[name="booking-treatment"]') as NodeListOf<HTMLInputElement>;
+        if (radios.length > 0) {
+          radios[0].checked = true;
+        }
+      }
+
+      overlay.classList.remove('pointer-events-none');
+      overlay.classList.replace('opacity-0', 'opacity-100');
+      card.classList.replace('scale-95', 'scale-100');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal() {
+      overlay.classList.add('pointer-events-none');
+      overlay.classList.replace('opacity-100', 'opacity-0');
+      card.classList.replace('scale-100', 'scale-95');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Capture CTA actions (header, hero, and specific catalog card buttons)
+    document.querySelectorAll('.open-booking-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const clickedBtn = e.currentTarget as HTMLElement;
+        const treatmentName = clickedBtn.getAttribute('data-treatment');
+        openModal(treatmentName);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Step navigation helper
+    function goToStep(stepNum: 1 | 2 | 3 | 'success') {
+      Object.keys(steps).forEach(key => {
+        const step = steps[key as unknown as 1 | 2 | 3 | 'success'];
+        if (key === String(stepNum)) {
+          step.classList.replace('hidden', 'block');
+        } else {
+          step.classList.replace('block', 'hidden');
+        }
+      });
+    }
+
+    // --- STEP 1 ---
+    document.getElementById('to-step-2')!.addEventListener('click', () => {
+      const checkedInput = document.querySelector('input[name="booking-treatment"]:checked');
+      if (checkedInput) {
+        goToStep(2);
+      }
+    });
+
+    // --- STEP 2 ---
+    const slotBtns = document.querySelectorAll('.time-slot-btn');
+    slotBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        slotBtns.forEach(b => b.classList.remove('border-gold', 'bg-gold/10'));
+        btn.classList.add('border-gold', 'bg-gold/10');
+        selectedTime = btn.getAttribute('data-time') || "";
+        (document.getElementById('booking-selected-time') as HTMLInputElement).value = selectedTime;
+      });
+    });
+
+    document.getElementById('back-to-1')!.addEventListener('click', () => goToStep(1));
+    
+    document.getElementById('to-step-3')!.addEventListener('click', () => {
+      const dateVal = (document.getElementById('booking-date') as HTMLInputElement).value;
+      if (!dateVal) {
+        alert("Please select a date for your appointment.");
+        return;
+      }
+      if (!selectedTime) {
+        alert("Please select a preferred time slot.");
+        return;
+      }
+      goToStep(3);
+    });
+
+    // --- STEP 3 ---
+    document.getElementById('back-to-2')!.addEventListener('click', () => goToStep(2));
+    
+    document.getElementById('confirm-booking')!.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('booking-name') as HTMLInputElement;
+      const phoneInput = document.getElementById('booking-phone') as HTMLInputElement;
+      
+      if (!nameInput.value.trim()) {
+        alert("Please enter your name.");
+        return;
+      }
+      if (!phoneInput.value.trim()) {
+        alert("Please enter your contact phone number.");
+        return;
+      }
+
+      const checkedInput = document.querySelector('input[name="booking-treatment"]:checked') as HTMLInputElement;
+      const dateVal = (document.getElementById('booking-date') as HTMLInputElement).value;
+      
+      document.getElementById('val-treatment')!.innerText = checkedInput.value;
+      document.getElementById('val-date')!.innerText = dateVal;
+      document.getElementById('val-time')!.innerText = selectedTime;
+      document.getElementById('val-name')!.innerText = nameInput.value;
+
+      goToStep('success');
+    });
+
+    // --- SUCCESS ---
+    document.getElementById('booking-done-btn')!.addEventListener('click', closeModal);
+  });
+</script>

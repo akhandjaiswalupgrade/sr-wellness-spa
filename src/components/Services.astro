@@ -1,0 +1,141 @@
+---
+const services = [
+  {
+    num: "1",
+    title: "Ayurvedic Harmony Massage",
+    image: "/assets/service-1.jpg",
+    desc: "A warm, sensory journey utilizing traditional brass oil lamps and flowing custom herbal oils to balance your doshas and melt stress.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
+    border: "border-gold/20 hover:border-gold/50"
+  },
+  {
+    num: "2",
+    title: "Deep Tissue Therapeutic",
+    image: "/assets/service-2.jpg",
+    desc: "Targeted release of chronic muscle tension. We map your body's pressure points to alleviate deep soreness and restore mobility.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
+    border: "border-rose/20 hover:border-rose/50"
+  },
+  {
+    num: "3",
+    title: "Hot Stone Ritual",
+    image: "/assets/service-3.jpg",
+    desc: "Polished black river stones are heated and placed on key energy centers. The radiating heat penetrates deep into muscles for ultimate relaxation.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
+    border: "border-gold/20 hover:border-gold/50"
+  },
+  {
+    num: "4",
+    title: "Anti-Aging Gold Facial",
+    image: "/assets/service-4.jpg",
+    desc: "An opulent skin treatment utilizing a gilded 3D gold facial mask. Promotes collagen synthesis, firms skin, and yields a luminous complexion.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
+    border: "border-rose/20 hover:border-rose/50"
+  },
+  {
+    num: "5",
+    title: "Couples Serenity Package",
+    image: "/assets/service-5.jpg",
+    desc: "Two intertwined souls, sharing a side-by-side therapeutic escape. Guided relaxation set in our private suite with a soft ambient glow.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
+    border: "border-gold/20 hover:border-gold/50"
+  },
+  {
+    num: "6",
+    title: "Turkish Hammam",
+    image: "/assets/service-6.jpg",
+    desc: "A classical purification ritual centered around a marble fountain. Includes a warm stone rest, kessa glove exfoliation, and foam massage.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
+    border: "border-rose/20 hover:border-rose/50"
+  }
+];
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 border-t border-white/5" id="services-section">
+  <!-- Interactive radial background gradient -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[180px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-20 md:mb-28 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Our Offerings</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Premium Services Collection
+      </h2>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Floating Grid (No bounding cards, just floating assets) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 md:gap-y-24">
+      {services.map((service, index) => (
+        <div 
+          class="group relative flex flex-col items-center text-center select-none"
+          id={`service-card-${index}`}
+        >
+          <!-- Floating Glow Aura Behind the Circle -->
+          <div class={`absolute top-20 w-36 h-36 rounded-full bg-current opacity-0 transition-opacity duration-700 blur-3xl -z-10 ${service.glow}`}></div>
+
+          <!-- Circular 3D Icon (Purely floating, no box borders) -->
+          <div class={`w-48 h-48 rounded-full overflow-hidden border bg-black/40 flex items-center justify-center shadow-lg relative mb-6 transform group-hover:-translate-y-3 group-hover:scale-105 transition-all duration-700 ease-out ${service.border}`}>
+            <!-- Ambient shadow overlay inside the circle -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40 z-10 pointer-events-none"></div>
+            <img 
+              src={service.image} 
+              alt={service.title} 
+              class="w-full h-full object-cover scale-[1.15] object-center group-hover:scale-125 transition-transform duration-700 ease-out"
+            />
+          </div>
+
+          <!-- Number & Name Line -->
+          <div class="flex flex-col items-center mb-3">
+            <span class="text-xs font-montserrat text-gold-dark/65 font-bold tracking-widest block uppercase mb-1">
+              {service.num}. {service.title.split(" ")[0]}
+            </span>
+            <h3 class="text-lg md:text-xl font-playfair font-medium text-white group-hover:text-gold-light transition-colors duration-300">
+              {service.title}
+            </h3>
+          </div>
+
+          <!-- Service description details -->
+          <p class="text-xs md:text-sm text-white/60 leading-relaxed font-light font-montserrat max-w-[280px]">
+            {service.desc}
+          </p>
+
+          <!-- Smart Booking CTA -->
+          <button 
+            class="open-booking-btn mt-4 text-[9px] md:text-[10px] tracking-[0.2em] font-montserrat font-bold text-gold hover:text-white uppercase transition-colors duration-300 py-1.5 px-4 border border-gold/20 hover:border-gold/60 rounded-full bg-black/40 hover:bg-gold/5"
+            data-treatment={service.title}
+          >
+            Book Ritual
+          </button>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Fade and scale up service elements gently as they scroll into view
+    gsap.from('[id^="service-card-"]', {
+      opacity: 0,
+      y: 40,
+      scale: 0.96,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#services-section',
+        start: 'top 75%',
+      }
+    });
+  });
+</script>

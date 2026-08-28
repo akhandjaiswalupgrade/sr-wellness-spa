@@ -1,0 +1,149 @@
+---
+---
+
+<!-- Floating Transparent Header -->
+<header class="absolute top-0 left-0 w-full bg-gradient-to-b from-black/85 via-black/40 to-transparent pt-6 pb-2 px-4 z-30 select-none text-center flex justify-center border-none">
+  <div class="max-w-[220px] md:max-w-[250px] w-full">
+    <!-- Tastfully Sized Real Spa Logo -->
+    <img 
+      src="/assets/new-logo.png" 
+      alt="Shirui Wellness Spa Branding" 
+      class="w-full h-auto object-contain mx-auto hover:scale-[1.02] transition-transform duration-700"
+    />
+  </div>
+</header>
+
+<!-- Sticky Navigation Bar (Revealed on Scroll - fixed top position) -->
+<nav id="sticky-navbar" class="w-full bg-black/85 backdrop-blur-md border-b border-white/5 py-4 px-4 fixed top-0 left-0 z-[35] transition-all duration-500 transform -translate-y-full opacity-0 pointer-events-none select-none">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    
+    <!-- Left: Slim Brand Label (visible on sticky/scroll) -->
+    <a href="#" class="flex items-center gap-2 opacity-0 -translate-x-4 transition-all duration-500" id="nav-brand-logo">
+      <img src="/assets/logo-lily.jpg" alt="Logo" class="w-8 h-8 rounded-full border border-gold/20" />
+      <span class="font-playfair font-semibold text-base tracking-widest text-white">SHIRUI</span>
+    </a>
+
+    <!-- Center: Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-8 text-xs font-montserrat tracking-[0.2em] uppercase font-medium">
+      <a href="#about" class="text-white/70 hover:text-gold transition-colors duration-300">About</a>
+      <a href="#services" class="text-white/70 hover:text-gold transition-colors duration-300">Treatments</a>
+      <a href="#signature" class="text-white/70 hover:text-gold transition-colors duration-300">Signature</a>
+      <a href="#gallery" class="text-white/70 hover:text-gold transition-colors duration-300">Ambience</a>
+      <a href="#faq" class="text-white/70 hover:text-gold transition-colors duration-300">FAQ</a>
+      <a href="#contact" class="text-white/70 hover:text-gold transition-colors duration-300">Contact</a>
+    </div>
+
+    <!-- Right: Booking CTA (Desktop) -->
+    <div class="hidden md:block">
+      <button 
+        class="open-booking-btn px-6 py-2 rounded-full font-montserrat font-bold tracking-[0.2em] text-[10px] text-black bg-gradient-to-r from-gold to-gold-dark hover:from-gold-light hover:to-gold uppercase transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+      >
+        Book Now
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Triggers -->
+    <div class="flex md:hidden items-center justify-between w-full">
+      <!-- Hamburger Menu Button -->
+      <button id="menu-toggle-btn" class="text-white hover:text-gold focus:outline-none p-1 shrink-0" aria-label="Toggle Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" id="hamburger-icon"></path>
+        </svg>
+      </button>
+      
+      <!-- Brand title in center for mobile sticky -->
+      <span class="font-playfair font-semibold tracking-widest text-sm text-white text-center">SHIRUI</span>
+
+      <!-- Mini Book CTA -->
+      <button 
+        class="open-booking-btn px-4 py-1.5 rounded-full font-montserrat font-bold tracking-[0.15em] text-[9px] text-black bg-gold uppercase shrink-0"
+      >
+        Book
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile Drawer Overlay -->
+<div id="mobile-menu-drawer" class="fixed inset-0 bg-black/95 z-[99] pointer-events-none opacity-0 transition-all duration-500 select-none flex flex-col justify-center items-center text-center">
+  <!-- Close Button -->
+  <button id="menu-close-btn" class="absolute top-6 right-6 text-white/70 hover:text-gold focus:outline-none p-2">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Drawer Links -->
+  <div class="flex flex-col gap-8 text-lg font-montserrat tracking-[0.25em] uppercase font-light text-white">
+    <a href="#about" class="mobile-drawer-link hover:text-gold transition-colors duration-300">About Us</a>
+    <a href="#services" class="mobile-drawer-link hover:text-gold transition-colors duration-300">Treatments</a>
+    <a href="#signature" class="mobile-drawer-link hover:text-gold transition-colors duration-300">Signature</a>
+    <a href="#gallery" class="mobile-drawer-link hover:text-gold transition-colors duration-300">Ambience</a>
+    <a href="#faq" class="mobile-drawer-link hover:text-gold transition-colors duration-300">FAQ</a>
+    <a href="#contact" class="mobile-drawer-link hover:text-gold transition-colors duration-300">Contact Us</a>
+  </div>
+  
+  <button 
+    class="open-booking-btn mt-12 px-10 py-3.5 rounded-full font-montserrat font-bold tracking-[0.25em] text-xs text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+  >
+    Book Appointment
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('sticky-navbar')!;
+    const brandLogo = document.getElementById('nav-brand-logo')!;
+    
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      
+      // Reveal navbar only after scrolling past the main hero tagline (180px)
+      if (scrollPos > 180) {
+        navbar.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        navbar.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto', 'shadow-lg', 'shadow-black/50', 'border-gold/10');
+        navbar.classList.replace('bg-black/85', 'bg-black/95');
+        brandLogo.classList.replace('opacity-0', 'opacity-100');
+        brandLogo.classList.replace('-translate-x-4', 'translate-x-0');
+      } else {
+        navbar.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        navbar.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto', 'shadow-lg', 'shadow-black/50', 'border-gold/10');
+        navbar.classList.replace('bg-black/95', 'bg-black/85');
+        brandLogo.classList.replace('opacity-100', 'opacity-0');
+        brandLogo.classList.replace('translate-x-0', '-translate-x-4');
+      }
+    });
+
+    const menuToggle = document.getElementById('menu-toggle-btn')!;
+    const menuClose = document.getElementById('menu-close-btn')!;
+    const drawer = document.getElementById('mobile-menu-drawer')!;
+    const drawerLinks = document.querySelectorAll('.mobile-drawer-link');
+
+    function openDrawer() {
+      drawer.classList.remove('pointer-events-none');
+      drawer.classList.replace('opacity-0', 'opacity-100');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeDrawer() {
+      drawer.classList.add('pointer-events-none');
+      drawer.classList.replace('opacity-100', 'opacity-0');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    menuToggle.addEventListener('click', openDrawer);
+    menuClose.addEventListener('click', closeDrawer);
+    
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Close mobile drawer by clicking on the background overlay
+    drawer.addEventListener('click', (e) => {
+      if (e.target === drawer) {
+        closeDrawer();
+      }
+    });
+  });
+</script>

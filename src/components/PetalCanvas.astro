@@ -1,0 +1,332 @@
+<div class="fixed inset-0 w-full h-full pointer-events-none z-[40]" id="petal-container">
+  <canvas id="petal-canvas" class="w-full h-full block"></canvas>
+</div>
+
+<script>
+  import * as THREE from 'three';
+
+  interface Particle {
+    type: 'petal' | 'droplet';
+    x: number;
+    y: number;
+    z: number;
+    speedX: number;
+    speedY: number;
+    speedZ: number;
+    rotX: number;
+    rotY: number;
+    rotZ: number;
+    rotSpeedX: number;
+    rotSpeedY: number;
+    rotSpeedZ: number;
+    baseScale: number;
+  }
+
+  class MarginFlowParticleSystem {
+    container: HTMLElement;
+    canvas: HTMLCanvasElement;
+    renderer: THREE.WebGLRenderer;
+    scene: THREE.Scene;
+    camera: THREE.OrthographicCamera;
+    
+    petalMesh: THREE.InstancedMesh | null;
+    dropletMesh: THREE.InstancedMesh | null;
+    
+    particles: Particle[];
+    dummy: THREE.Object3D;
+    
+    width: number;
+    height: number;
+    isMobile: boolean;
+    petalCount: number;
+    dropletCount: number;
+
+    constructor() {
+      this.container = document.getElementById('petal-container')!;
+      this.canvas = document.getElementById('petal-canvas') as HTMLCanvasElement;
+      
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.isMobile = this.width < 768;
+
+      // Calculate counts based on mobile/desktop performance
+      const scale = this.isMobile ? 0.4 : 1.0;
+      this.petalCount = Math.round(60 * scale);
+      this.dropletCount = Math.round(40 * scale);
+
+      this.renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance"
+      });
+      this.renderer.setSize(this.width, this.height);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      this.scene = new THREE.Scene();
+      
+      this.camera = new THREE.OrthographicCamera(
+        -this.width / 2, this.width / 2,
+        this.height / 2, -this.height / 2,
+        1, 1000
+      );
+      this.camera.position.z = 500;
+
+      this.petalMesh = null;
+      this.dropletMesh = null;
+      this.particles = [];
+      this.dummy = new THREE.Object3D();
+
+      this.init();
+      this.animate();
+      
+      window.addEventListener('resize', this.onResize.bind(this));
+    }
+
+    createPetalTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      
+      ctx.translate(32, 32);
+      
+      const grad = ctx.createRadialGradient(0, 0, 2, 0, 0, 30);
+      grad.addColorStop(0, '#fbcfe8'); // rose-light
+      grad.addColorStop(0.3, '#f472b6'); // rose-pink
+      grad.addColorStop(0.7, '#ec4899'); // rose
+      grad.addColorStop(1, 'rgba(236, 72, 153, 0)');
+      
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(0, -28);
+      ctx.bezierCurveTo(16, -12, 16, 12, 0, 28);
+      ctx.bezierCurveTo(-16, 12, -16, -12, 0, -28);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Gold vein highlights
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+      ctx.lineWidth = 1.0;
+      ctx.beginPath();
+      ctx.moveTo(0, 24);
+      ctx.quadraticCurveTo(0, 0, 0, -24);
+      ctx.moveTo(0, 8);
+      ctx.quadraticCurveTo(5, -2, 6, -12);
+      ctx.moveTo(0, 8);
+      ctx.quadraticCurveTo(-5, -2, -6, -12);
+      ctx.stroke();
+      
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    createDropletTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+
+      ctx.translate(32, 32);
+
+      const grad = ctx.createRadialGradient(-6, -6, 2, 0, 0, 28);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
+      grad.addColorStop(0.2, 'rgba(56, 189, 248, 0.25)'); // spaBlue-light
+      grad.addColorStop(0.7, 'rgba(14, 165, 233, 0.08)');  // spaBlue
+      grad.addColorStop(0.95, 'rgba(14, 165, 233, 0.35)');
+      grad.addColorStop(1, 'rgba(14, 165, 233, 0)');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(0, 0, 26, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Specular highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.beginPath();
+      ctx.arc(-8, -8, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    // Helper to spawn a particle exclusively in the left or right margin gutters
+    spawnXPosition() {
+      const marginWidth = this.width * (this.isMobile ? 0.25 : 0.28);
+      const isRight = Math.random() > 0.5;
+      
+      if (isRight) {
+        // Right margin: from (width/2 - marginWidth) to (width/2)
+        return (this.width / 2) - (Math.random() * marginWidth);
+      } else {
+        // Left margin: from (-width/2) to (-width/2 + marginWidth)
+        return (-this.width / 2) + (Math.random() * marginWidth);
+      }
+    }
+
+    init() {
+      const petalTex = this.createPetalTexture();
+      const dropletTex = this.createDropletTexture();
+      if (!petalTex || !dropletTex) return;
+
+      const petalGeo = new THREE.PlaneGeometry(this.isMobile ? 18 : 28, this.isMobile ? 22 : 32);
+      const dropletGeo = new THREE.PlaneGeometry(this.isMobile ? 12 : 20, this.isMobile ? 12 : 20);
+
+      const petalMat = new THREE.MeshBasicMaterial({
+        map: petalTex,
+        transparent: true,
+        opacity: 0.8,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      const dropletMat = new THREE.MeshBasicMaterial({
+        map: dropletTex,
+        transparent: true,
+        opacity: 0.75,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      this.petalMesh = new THREE.InstancedMesh(petalGeo, petalMat, this.petalCount);
+      this.dropletMesh = new THREE.InstancedMesh(dropletGeo, dropletMat, this.dropletCount);
+
+      this.scene.add(this.petalMesh);
+      this.scene.add(this.dropletMesh);
+
+      // Create falling petals
+      for (let i = 0; i < this.petalCount; i++) {
+        this.particles.push({
+          type: 'petal',
+          x: this.spawnXPosition(),
+          y: (Math.random() * this.height * 1.5) - this.height / 2, // stagger Y positions
+          z: (Math.random() - 0.5) * 80,
+          speedX: -0.6 + Math.random() * 1.2,
+          speedY: -1.0 - Math.random() * 1.5,
+          speedZ: -0.1 + Math.random() * 0.2,
+          rotX: Math.random() * Math.PI * 2,
+          rotY: Math.random() * Math.PI * 2,
+          rotZ: Math.random() * Math.PI * 2,
+          rotSpeedX: 0.005 + Math.random() * 0.015,
+          rotSpeedY: 0.01 + Math.random() * 0.02,
+          rotSpeedZ: 0.005 + Math.random() * 0.01,
+          baseScale: 0.5 + Math.random() * 0.7
+        });
+      }
+
+      // Create falling droplets
+      for (let i = 0; i < this.dropletCount; i++) {
+        this.particles.push({
+          type: 'droplet',
+          x: this.spawnXPosition(),
+          y: (Math.random() * this.height * 1.5) - this.height / 2,
+          z: (Math.random() - 0.5) * 40,
+          speedX: -0.4 + Math.random() * 0.8,
+          speedY: -1.5 - Math.random() * 2.0, // water falls slightly faster
+          speedZ: -0.05 + Math.random() * 0.1,
+          rotX: 0,
+          rotY: 0,
+          rotZ: Math.random() * Math.PI * 2,
+          rotSpeedX: 0,
+          rotSpeedY: 0,
+          rotSpeedZ: 0.005 + Math.random() * 0.01,
+          baseScale: 0.5 + Math.random() * 0.7
+        });
+      }
+    }
+
+    animate() {
+      requestAnimationFrame(this.animate.bind(this));
+
+      let petalIndex = 0;
+      let dropletIndex = 0;
+
+      const boundaryY = this.height / 2;
+      const boundaryX = this.width / 2;
+
+      // Define central safe margin width where text/headings sit
+      const safeWidth = this.width * (this.isMobile ? 0.25 : 0.22); // Middle 44%-50% is clean text zone
+      const fadeEdge = this.width * (this.isMobile ? 0.35 : 0.32);  // Smooth transition up to 64%-70% width
+
+      this.particles.forEach(p => {
+        // Apply vertical gravity and wind drift
+        p.y += p.speedY;
+        p.x += p.speedX;
+        p.z += p.speedZ;
+        p.rotX += p.rotSpeedX;
+        p.rotY += p.rotSpeedY;
+        p.rotZ += p.rotSpeedZ;
+
+        // Reset particle if it falls below the viewport
+        if (p.y < -boundaryY - 40) {
+          p.y = boundaryY + 40 + Math.random() * 150;
+          p.x = this.spawnXPosition();
+          p.speedX = -0.5 + Math.random() * 1.0;
+        }
+
+        // Keep horizontal drift within boundary limits
+        if (p.x < -boundaryX - 40) p.x = boundaryX + 40;
+        else if (p.x > boundaryX + 40) p.x = -boundaryX - 40;
+
+        // CENTER FADE MATH: Calculate scale factor based on distance from center (x = 0)
+        const absX = Math.abs(p.x);
+        let fadeFactor = 1.0;
+
+        if (absX < safeWidth) {
+          // Inside central text safety zone: 100% invisible
+          fadeFactor = 0.0;
+        } else if (absX < fadeEdge) {
+          // Smoothly interpolate scale between safe margin and fade edge
+          fadeFactor = (absX - safeWidth) / (fadeEdge - safeWidth);
+        }
+
+        const scale = p.baseScale * fadeFactor;
+
+        // Apply transformations
+        this.dummy.position.set(p.x, p.y, p.z);
+        this.dummy.rotation.set(p.rotX, p.rotY, p.rotZ);
+        this.dummy.scale.set(scale, scale, scale);
+        this.dummy.updateMatrix();
+
+        // Update correct InstancedMesh
+        if (p.type === 'petal') {
+          this.petalMesh!.setMatrixAt(petalIndex++, this.dummy.matrix);
+        } else {
+          this.dropletMesh!.setMatrixAt(dropletIndex++, this.dummy.matrix);
+        }
+      });
+
+      if (this.petalMesh) this.petalMesh.instanceMatrix.needsUpdate = true;
+      if (this.dropletMesh) this.dropletMesh.instanceMatrix.needsUpdate = true;
+
+      this.renderer.render(this.scene, this.camera);
+    }
+
+    onResize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.isMobile = this.width < 768;
+
+      this.renderer.setSize(this.width, this.height);
+      
+      this.camera.left = -this.width / 2;
+      this.camera.right = this.width / 2;
+      this.camera.top = this.height / 2;
+      this.camera.bottom = -this.height / 2;
+      this.camera.updateProjectionMatrix();
+
+      // Reset out-of-bounds horizontal positions immediately on resize
+      const boundaryX = this.width / 2;
+      this.particles.forEach(p => {
+        if (Math.abs(p.x) > boundaryX + 40) {
+          p.x = this.spawnXPosition();
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new MarginFlowParticleSystem();
+  });
+</script>

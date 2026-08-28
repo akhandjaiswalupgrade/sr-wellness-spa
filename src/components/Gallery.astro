@@ -1,0 +1,391 @@
+---
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="gallery-section">
+  <!-- Interactive Dark Fluid Water Background WebGL Canvas -->
+  <div class="absolute inset-0 z-0 opacity-80 pointer-events-none">
+    <canvas id="water-canvas" class="w-full h-full block"></canvas>
+  </div>
+  
+  <!-- Subtle top and bottom dark fade gradients to blend sections -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10 pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-20">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-16 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Sanctuary Vibe</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Ambience Gallery
+      </h2>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Symmetrical Teardrop / Water-Droplet Gallery Windows (5 Droplets Arch) -->
+    <div class="flex items-center justify-center gap-2.5 md:gap-6 mt-16 md:mt-24 select-none relative h-[300px] md:h-[420px]">
+      
+      <!-- 1. Far Left Droplet (Small) -->
+      <div 
+        class="w-16 h-16 md:w-28 md:h-28 rounded-[50%_50%_50%_0%] rotate-[-45deg] overflow-hidden border border-gold/15 shadow-md relative bg-dark-card transition-all duration-700 hover:border-gold/40 opacity-70 hover:opacity-100"
+        id="droplet-far-left"
+      >
+        <div class="rotate-[45deg] scale-[1.4] w-full h-full relative">
+          <img 
+            src="/assets/service-1.jpg" 
+            alt="Spa element" 
+            class="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            id="fl-img-1"
+          />
+          <img 
+            src="/assets/signature-pearl.jpg" 
+            alt="Spa element" 
+            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-0"
+            id="fl-img-2"
+          />
+        </div>
+      </div>
+
+      <!-- 2. Left-Center Droplet (Medium) -->
+      <div 
+        class="w-24 h-24 md:w-40 md:h-40 rounded-[50%_50%_50%_0%] rotate-[-45deg] overflow-hidden border border-gold/20 shadow-xl relative bg-dark-card transition-all duration-700 hover:border-gold/50 opacity-90 hover:opacity-100"
+        id="droplet-left"
+      >
+        <div class="rotate-[45deg] scale-[1.4] w-full h-full relative">
+          <img 
+            src="/assets/philosophy-right.jpg" 
+            alt="Massage treatment" 
+            class="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            id="l-img-1"
+          />
+          <img 
+            src="/assets/signature-hands.jpg" 
+            alt="Massage treatment" 
+            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-0"
+            id="l-img-2"
+          />
+        </div>
+      </div>
+
+      <!-- 3. Center Droplet (Large Showcase) -->
+      <div 
+        class="w-32 h-32 md:w-56 md:h-56 rounded-[50%_50%_50%_0%] rotate-[-45deg] overflow-hidden border border-gold/30 shadow-[0_10px_35px_rgba(212,175,55,0.15)] relative bg-dark-card scale-105 md:scale-110 z-10 transition-all duration-700 hover:border-gold/60"
+        id="droplet-center"
+      >
+        <div class="rotate-[45deg] scale-[1.4] w-full h-full relative">
+          <img 
+            src="/assets/signature-hands.jpg" 
+            alt="Spa ambience" 
+            class="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            id="c-img-1"
+          />
+          <img 
+            src="/assets/philosophy-left.jpg" 
+            alt="Spa ambience" 
+            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-0"
+            id="c-img-2"
+          />
+        </div>
+      </div>
+
+      <!-- 4. Right-Center Droplet (Medium) -->
+      <div 
+        class="w-24 h-24 md:w-40 md:h-40 rounded-[50%_50%_50%_0%] rotate-[-45deg] overflow-hidden border border-gold/20 shadow-xl relative bg-dark-card transition-all duration-700 hover:border-gold/50 opacity-90 hover:opacity-100"
+        id="droplet-right"
+      >
+        <div class="rotate-[45deg] scale-[1.4] w-full h-full relative">
+          <img 
+            src="/assets/philosophy-left.jpg" 
+            alt="Hot stones" 
+            class="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            id="r-img-1"
+          />
+          <img 
+            src="/assets/philosophy-right.jpg" 
+            alt="Hot stones" 
+            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-0"
+            id="r-img-2"
+          />
+        </div>
+      </div>
+
+      <!-- 5. Far Right Droplet (Small) -->
+      <div 
+        class="w-16 h-16 md:w-28 md:h-28 rounded-[50%_50%_50%_0%] rotate-[-45deg] overflow-hidden border border-gold/15 shadow-md relative bg-dark-card transition-all duration-700 hover:border-gold/40 opacity-70 hover:opacity-100"
+        id="droplet-far-right"
+      >
+        <div class="rotate-[45deg] scale-[1.4] w-full h-full relative">
+          <img 
+            src="/assets/signature-pearl.jpg" 
+            alt="Oyster pearl shell" 
+            class="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            id="fr-img-1"
+          />
+          <img 
+            src="/assets/service-1.jpg" 
+            alt="Oyster pearl shell" 
+            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-0"
+            id="fr-img-2"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="flex justify-center items-center gap-3 mt-10 md:mt-16">
+      <button class="w-2.5 h-2.5 rounded-full bg-gold transition-all duration-300" id="carousel-dot-0" aria-label="Slide 1"></button>
+      <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-gold/50 transition-all duration-300" id="carousel-dot-1" aria-label="Slide 2"></button>
+    </div>
+
+  </div>
+  
+  <!-- Premium Footer -->
+  <footer class="mt-28 md:mt-40 max-w-6xl mx-auto border-t border-white/10 pt-12 select-none text-center flex flex-col items-center justify-between gap-6 md:flex-row text-white/50 text-xs">
+    <div class="flex items-center gap-3">
+      <span class="text-gold font-playfair font-semibold tracking-widest text-sm">SHIRUI</span>
+      <span>&bull;</span>
+      <span class="font-montserrat text-[10px] tracking-widest uppercase">Hyderabad Sanctuary</span>
+    </div>
+    
+    <p class="font-montserrat">
+      &copy; {new Date().getFullYear()} Shirui Wellness Spa. All rights reserved.
+    </p>
+    
+    <div class="flex items-center gap-6">
+      <a href="#services" class="hover:text-gold transition-colors">Treatments</a>
+      <a href="#philosophy" class="hover:text-gold transition-colors">Philosophy</a>
+      <a href="#booking" class="hover:text-gold transition-colors">Reservations</a>
+    </div>
+  </footer>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- CAROUSEL SLIDESHOW LOGIC ---
+  let currentSlide = 0;
+  const slideDuration = 4000;
+  
+  function setSlide(slideIndex: number) {
+    currentSlide = slideIndex;
+    const isFirst = slideIndex === 0;
+
+    const pairs = [
+      { id1: 'fl-img-1', id2: 'fl-img-2' },
+      { id1: 'l-img-1', id2: 'l-img-2' },
+      { id1: 'c-img-1', id2: 'c-img-2' },
+      { id1: 'r-img-1', id2: 'r-img-2' },
+      { id1: 'fr-img-1', id2: 'fr-img-2' }
+    ];
+
+    pairs.forEach(pair => {
+      const active = document.getElementById(isFirst ? pair.id1 : pair.id2)!;
+      const inactive = document.getElementById(isFirst ? pair.id2 : pair.id1)!;
+
+      active.classList.replace('opacity-0', 'opacity-100');
+      inactive.classList.replace('opacity-100', 'opacity-0');
+    });
+
+    const dots = [
+      document.getElementById('carousel-dot-0')!,
+      document.getElementById('carousel-dot-1')!
+    ];
+    dots.forEach((dot, idx) => {
+      if (idx === slideIndex) {
+        dot.classList.replace('bg-white/20', 'bg-gold');
+      } else {
+        dot.classList.replace('bg-gold', 'bg-white/20');
+      }
+    });
+  }
+
+  function autoPlay() {
+    setSlide((currentSlide + 1) % 2);
+  }
+
+  // --- WEBGL WATER SHADER LOGIC ---
+  class WaterShader {
+    canvas: HTMLCanvasElement;
+    gl: WebGLRenderingContext | null;
+    program: WebGLProgram | null;
+    timeUniform: WebGLUniformLocation | null;
+    resUniform: WebGLUniformLocation | null;
+    time: number;
+
+    constructor() {
+      this.canvas = document.getElementById('water-canvas') as HTMLCanvasElement;
+      if (!this.canvas) return;
+
+      this.gl = this.canvas.getContext('webgl');
+      this.program = null;
+      this.timeUniform = null;
+      this.resUniform = null;
+      this.time = 0;
+
+      if (!this.gl) {
+        this.canvas.style.display = 'none';
+        return;
+      }
+
+      this.init();
+      this.resize();
+      this.animate();
+
+      window.addEventListener('resize', this.resize.bind(this));
+    }
+
+    createShader(type: number, source: string): WebGLShader | null {
+      const shader = this.gl!.createShader(type);
+      if (!shader) return null;
+      this.gl!.shaderSource(shader, source);
+      this.gl!.compileShader(shader);
+      if (!this.gl!.getShaderParameter(shader, this.gl!.COMPILE_STATUS)) {
+        this.gl!.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    init() {
+      const vsSource = `
+        attribute vec2 position;
+        void main() {
+          gl_Position = vec4(position, 0.0, 1.0);
+        }
+      `;
+
+      const fsSource = `
+        precision mediump float;
+        uniform float uTime;
+        uniform vec2 uResolution;
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / uResolution.xy;
+          
+          float r1 = sin(uv.x * 6.5 + uTime * 0.75) * 0.06;
+          float r2 = cos(uv.y * 7.5 + uTime * 0.65) * 0.06;
+          float r3 = sin((uv.x + uv.y) * 5.0 + uTime * 0.45) * 0.04;
+          
+          float height = r1 + r2 + r3;
+          
+          vec3 darkWater = vec3(0.01, 0.025, 0.04);
+          
+          float specular = smoothstep(0.015, 0.06, height) * 0.12;
+          vec3 finalColor = darkWater + vec3(0.1, 0.35, 0.5) * specular;
+          
+          float dist = distance(uv, vec2(0.5));
+          float vign = smoothstep(0.85, 0.2, dist);
+          
+          gl_FragColor = vec4(finalColor * vign, 1.0);
+        }
+      `;
+
+      const vs = this.createShader(this.gl!.VERTEX_SHADER, vsSource);
+      const fs = this.createShader(this.gl!.FRAGMENT_SHADER, fsSource);
+      if (!vs || !fs) return;
+
+      this.program = this.gl!.createProgram()!;
+      this.gl!.attachShader(this.program, vs);
+      this.gl!.attachShader(this.program, fs);
+      this.gl!.linkProgram(this.program);
+
+      const vertices = new Float32Array([
+        -1.0, -1.0,
+         1.0, -1.0,
+        -1.0,  1.0,
+        -1.0,  1.0,
+         1.0, -1.0,
+         1.0,  1.0,
+      ]);
+
+      const buffer = this.gl!.createBuffer();
+      this.gl!.bindBuffer(this.gl!.ARRAY_BUFFER, buffer);
+      this.gl!.bufferData(this.gl!.ARRAY_BUFFER, vertices, this.gl!.STATIC_DRAW);
+
+      const posAttr = this.gl!.getAttribLocation(this.program, 'position');
+      this.gl!.enableVertexAttribArray(posAttr);
+      this.gl!.vertexAttribPointer(posAttr, 2, this.gl!.FLOAT, false, 0, 0);
+
+      this.timeUniform = this.gl!.getUniformLocation(this.program, 'uTime');
+      this.resUniform = this.gl!.getUniformLocation(this.program, 'uResolution');
+    }
+
+    resize() {
+      const w = this.canvas.clientWidth;
+      const h = this.canvas.clientHeight;
+      this.canvas.width = w;
+      this.canvas.height = h;
+      this.gl!.viewport(0, 0, w, h);
+    }
+
+    animate() {
+      requestAnimationFrame(this.animate.bind(this));
+      this.time += 0.02;
+      if (this.program) {
+        this.gl!.useProgram(this.program);
+        this.gl!.uniform1f(this.timeUniform, this.time);
+        this.gl!.uniform2f(this.resUniform, this.canvas.width, this.canvas.height);
+      }
+      this.gl!.clearColor(0, 0, 0, 1);
+      this.gl!.clear(this.gl!.COLOR_BUFFER_BIT);
+      this.gl!.drawArrays(this.gl!.TRIANGLES, 0, 6);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new WaterShader();
+
+    let intervalId = setInterval(autoPlay, slideDuration);
+
+    const dots = [
+      document.getElementById('carousel-dot-0')!,
+      document.getElementById('carousel-dot-1')!
+    ];
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        clearInterval(intervalId);
+        setSlide(idx);
+        intervalId = setInterval(autoPlay, slideDuration);
+      });
+    });
+
+    // Stagger slide entry animations
+    gsap.from('#droplet-far-left, #droplet-far-right', {
+      opacity: 0,
+      scale: 0.7,
+      duration: 1.4,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#gallery-section',
+        start: 'top 75%',
+      }
+    });
+
+    gsap.from('#droplet-left, #droplet-right', {
+      opacity: 0,
+      scale: 0.82,
+      y: 15,
+      duration: 1.4,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#gallery-section',
+        start: 'top 75%',
+      }
+    });
+
+    gsap.from('#droplet-center', {
+      opacity: 0,
+      scale: 0.95,
+      y: 30,
+      duration: 1.4,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#gallery-section',
+        start: 'top 75%',
+      }
+    });
+  });
+</script>
