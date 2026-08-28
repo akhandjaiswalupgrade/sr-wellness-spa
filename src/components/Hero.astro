@@ -11,11 +11,11 @@
   <!-- Solid Black Overlay for Text Legibility and Contrast -->
   <div class="absolute inset-0 bg-black/60 z-10 pointer-events-none"></div>
 
-  <!-- Hero Content Overlay (Tagline, Subtext & Booking) -->
+  <!-- Hero Content Overlay (Tagline, Subtext, Booking & Metrics) -->
   <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20 md:mt-28" id="hero-content">
     
-    <!-- Animated taglines (Mobile-first stacked flex, desktop horizontal inline, bold layout) -->
-    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.22em] font-semibold text-white leading-none mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0" id="hero-banner-title">
+    <!-- Animated taglines (Explicitly sized arbitrary values to guarantee large rendering on mobile) -->
+    <h2 class="text-[32px] md:text-[56px] lg:text-[72px] font-playfair tracking-[0.2em] font-semibold text-white leading-none mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0" id="hero-banner-title">
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4">RELAX.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-rose-light">REJUVENATE.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-gold">RENEW.</span>
@@ -48,6 +48,24 @@
           <span class="text-gold animate-pulse">&bull;</span>
         </span>
       </button>
+    </div>
+
+    <!-- Luxury Metrics Bar to fill space and add trust credentials -->
+    <div 
+      id="hero-metrics"
+      class="mt-12 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 opacity-0 transform translate-y-4 text-white/40 text-[9px] md:text-[10px] font-montserrat tracking-[0.25em] uppercase select-none font-medium"
+    >
+      <span class="flex items-center gap-2">
+        <span class="text-gold">&bull;</span> CERTIFIED THERAPISTS
+      </span>
+      <span class="hidden sm:inline text-white/10">|</span>
+      <span class="flex items-center gap-2">
+        <span class="text-gold">&bull;</span> 100% ORGANIC OILS
+      </span>
+      <span class="hidden sm:inline text-white/10">|</span>
+      <span class="flex items-center gap-2">
+        <span class="text-gold">&bull;</span> PRIVATE HAMMAM SUITES
+      </span>
     </div>
 
   </div>
@@ -243,7 +261,7 @@
         scale: 1.0,
         duration: 0.1
       })
-      // Fade in the new poetic subtext description
+      // Fade in the poetic subtext description
       .to('#hero-subtext', {
         opacity: 1,
         y: 0,
@@ -256,7 +274,14 @@
         y: 0,
         duration: 0.5,
         ease: 'power2.out'
-      }, '-=0.2');
+      }, '-=0.2')
+      // Fade in the luxury metrics bar to fill the space
+      .to('#hero-metrics', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, '-=0.15');
     }
   }
 
