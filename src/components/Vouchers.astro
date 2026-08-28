@@ -114,7 +114,9 @@ const vouchers = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Stagger fade-in of cards snappily
+    const isMobile = window.innerWidth < 768;
+
+    // Stagger fade-in of cards snappily (instant on mobile to prevent delays)
     gsap.from('.voucher-card', {
       opacity: 0,
       y: 15,
@@ -122,14 +124,14 @@ const vouchers = [
       duration: 0.45,
       stagger: 0.08,
       ease: 'power2.out',
-      scrollTrigger: {
+      scrollTrigger: isMobile ? null : {
         trigger: '#vouchers-section',
         start: 'top 80%',
       }
     });
 
     // 3D Tilt effect on hover (Desktop only)
-    if (window.innerWidth > 768) {
+    if (!isMobile) {
       const cards = document.querySelectorAll('.voucher-card');
       
       cards.forEach(card => {
@@ -165,5 +167,10 @@ const vouchers = [
         });
       });
     }
+  });
+
+  // Force ScrollTrigger coordinates recalculation after images are loaded
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
   });
 </script>

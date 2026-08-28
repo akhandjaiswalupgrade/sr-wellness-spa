@@ -124,7 +124,9 @@ const services = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Fast, crisp fade-ins for the service cards
+    const isMobile = window.innerWidth < 768;
+
+    // Fast, crisp fade-ins for the service cards (instant on mobile to prevent delays)
     gsap.from('[id^="service-card-"]', {
       opacity: 0,
       y: 15,
@@ -132,10 +134,15 @@ const services = [
       duration: 0.45,
       stagger: 0.06,
       ease: 'power2.out',
-      scrollTrigger: {
+      scrollTrigger: isMobile ? null : {
         trigger: '#services-section',
         start: 'top 80%',
       }
     });
+  });
+
+  // Force ScrollTrigger coordinates recalculation after images are loaded
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
   });
 </script>
