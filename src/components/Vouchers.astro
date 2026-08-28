@@ -1,0 +1,169 @@
+---
+const vouchers = [
+  {
+    tier: "Silver",
+    title: "Aura Relax Ritual",
+    duration: "60 Minutes",
+    price: "₹2,499",
+    desc: "Includes our Swedish aromatherapy massage, organic essential oils, and hot steam bath access.",
+    border: "border-white/10 hover:border-white/30",
+    glow: "shadow-[0_0_30px_rgba(255,255,255,0.05)]",
+    text: "text-white/80"
+  },
+  {
+    tier: "Gold",
+    title: "Luxe Rejuvenation",
+    duration: "90 Minutes",
+    price: "₹4,999",
+    desc: "Includes Deep Tissue massage, custom pressure release, hot stones, organic oils, and signature facial.",
+    border: "border-gold/20 hover:border-gold/50",
+    glow: "shadow-[0_0_40px_rgba(212,175,55,0.15)]",
+    text: "text-gold",
+    badge: "Most Popular"
+  },
+  {
+    tier: "Platinum",
+    title: "Royal Hammam & Massage",
+    duration: "120 Minutes",
+    price: "₹8,999",
+    desc: "Full premium sanctuary package: Turkish Hammam foam ritual, Balinese hot oil massage, and signature Pearl Powder scrub.",
+    border: "border-rose/25 hover:border-rose/55",
+    glow: "shadow-[0_0_40px_rgba(244,114,182,0.15)]",
+    text: "text-rose-light"
+  }
+];
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="vouchers-section">
+  <!-- Glowing blurs -->
+  <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-gold/5 blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-20 md:mb-28 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Sanctuary Gifts</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Gift a Massage to VIPs
+      </h2>
+      <p class="text-xs md:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+        Share the gift of luxury and peace. Send a customized digital sanctuary voucher directly to their WhatsApp.
+      </p>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch select-none">
+      {vouchers.map((v, index) => (
+        <div 
+          class={`voucher-card relative rounded-2xl glassmorphism border p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:-translate-y-3 cursor-pointer group bg-black/40 ${v.border} ${v.glow}`}
+          id={`voucher-card-${index}`}
+        >
+          {v.badge && (
+            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[9px] font-montserrat font-bold uppercase tracking-widest text-black bg-gold shadow-[0_4px_12px_rgba(212,175,55,0.4)]">
+              {v.badge}
+            </span>
+          )}
+
+          <div>
+            <!-- Tier -->
+            <span class={`text-[10px] font-montserrat font-bold tracking-[0.35em] uppercase block mb-2 ${v.text}`}>
+              {v.tier} Voucher
+            </span>
+            <!-- Title -->
+            <h3 class="text-xl md:text-2xl font-playfair font-semibold text-white mb-1">
+              {v.title}
+            </h3>
+            <!-- Duration -->
+            <span class="text-[10px] font-montserrat text-white/40 block mb-6 uppercase tracking-wider">
+              Duration: {v.duration}
+            </span>
+            <!-- Description -->
+            <p class="text-xs text-white/60 leading-relaxed font-light font-montserrat mb-8">
+              {v.desc}
+            </p>
+          </div>
+
+          <div>
+            <!-- Divider -->
+            <div class="h-[1px] bg-white/5 w-full mb-6"></div>
+            <!-- Price & Button -->
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-xl md:text-2.5xl font-playfair font-bold text-white tracking-wide">
+                {v.price}
+              </span>
+              <button 
+                class="open-booking-btn px-5 py-2 rounded-full font-montserrat font-bold tracking-widest text-[9px] text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300 shadow-md shadow-gold/5"
+                data-treatment={`${v.tier} Gift Voucher: ${v.title}`}
+              >
+                Gift Voucher
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Stagger fade-in of cards
+    gsap.from('.voucher-card', {
+      opacity: 0,
+      y: 45,
+      scale: 0.96,
+      duration: 0.9,
+      stagger: 0.15,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#vouchers-section',
+        start: 'top 75%',
+      }
+    });
+
+    // 3D Tilt effect on hover (Desktop only)
+    if (window.innerWidth > 768) {
+      const cards = document.querySelectorAll('.voucher-card');
+      
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e: any) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = -(y - centerY) / 12;
+          const rotateY = (x - centerX) / 12;
+          
+          gsap.to(card, {
+            rotateX: rotateX,
+            rotateY: rotateY,
+            transformPerspective: 800,
+            duration: 0.3,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        });
+      });
+    }
+  });
+</script>
