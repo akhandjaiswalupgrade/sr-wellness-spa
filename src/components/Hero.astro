@@ -11,61 +11,56 @@
   <!-- Solid Black Overlay for Text Legibility and Contrast -->
   <div class="absolute inset-0 bg-black/60 z-10 pointer-events-none"></div>
 
-  <!-- Hero Content Overlay (Tagline, Subtext, Booking & Metrics) -->
+  <!-- Hero Content Overlay (Tagline, Subtext, Booking & Pill Badges) -->
   <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20 md:mt-28" id="hero-content">
     
-    <!-- Animated taglines (Explicitly sized arbitrary values to guarantee large rendering on mobile) -->
-    <h2 class="text-[32px] md:text-[56px] lg:text-[72px] font-playfair tracking-[0.2em] font-semibold text-white leading-none mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0" id="hero-banner-title">
-      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4">RELAX.</span>
-      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-rose-light">REJUVENATE.</span>
-      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-gold">RENEW.</span>
+    <!-- Animated taglines (High-fashion editorial typography mix of bold serif and flowing italic) -->
+    <h2 class="text-[34px] md:text-[58px] lg:text-[76px] font-playfair tracking-[0.2em] font-semibold text-white leading-none mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 animate-title" id="hero-banner-title">
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 uppercase">RELAX.</span>
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 italic font-normal normal-case text-rose-light/95">Rejuvenate.</span>
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 uppercase text-gold">RENEW.</span>
     </h2>
 
-    <!-- Poetic Spa Description subtext for business identity -->
+    <!-- Poetic Spa Description subtext for business identity (Sentence case for premium editorial readability) -->
     <p 
       id="hero-subtext"
-      class="text-[9.5px] md:text-xs font-montserrat uppercase tracking-[0.16em] text-white/50 max-w-[260px] md:max-w-md mx-auto mb-6 md:mb-12 leading-relaxed font-light drop-shadow opacity-0 transform translate-y-4"
+      class="text-xs md:text-sm font-montserrat text-white/70 max-w-[280px] md:max-w-xl mx-auto mb-8 md:mb-12 leading-relaxed font-light drop-shadow opacity-0 transform translate-y-4"
     >
       Indulge in certified body massages, traditional hot stone rituals, and signature hammam therapies in Hyderabad.
     </p>
 
-    <!-- Glowing booking button (Cyan-Blue theme matching the pool) -->
+    <!-- Glowing Polished Gold booking button (Immediate primary call to action) -->
     <div class="opacity-0 transform translate-y-6" id="hero-booking-container">
       <button 
-        class="open-booking-btn relative px-10 py-3 md:px-14 md:py-4 rounded-full font-montserrat font-bold tracking-[0.25em] text-xs md:text-sm text-gold-light uppercase transition-all duration-500 overflow-hidden group shadow-[0_0_35px_rgba(14,165,233,0.3)] hover:scale-105"
-        style="background: linear-gradient(135deg, rgba(12,12,12,0.95), rgba(20,20,20,0.98)); border: 2px solid #d4af37;"
+        class="open-booking-btn relative px-12 py-3.5 md:px-16 md:py-4.5 rounded-full font-montserrat font-bold tracking-[0.25em] text-xs md:text-sm text-black bg-gradient-to-r from-gold via-gold-light to-gold-dark hover:scale-105 transition-all duration-500 shadow-[0_6px_25px_rgba(212,175,55,0.35)] overflow-hidden group uppercase"
       >
-        <!-- Cyan Blue glow core matching the pool -->
-        <span class="absolute inset-0 bg-gradient-to-r from-spaBlue/40 to-rose/10 opacity-60 blur-lg group-hover:opacity-100 transition-opacity duration-500"></span>
-        
-        <!-- Hover sliding gold glare -->
-        <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 group-hover:left-[150%] transition-all duration-1000 ease-out"></span>
+        <!-- Hover sliding glare -->
+        <span class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 group-hover:left-[150%] transition-all duration-1000 ease-out"></span>
         
         <!-- Button content -->
         <span class="relative z-10 flex items-center gap-3">
-          <span class="text-gold animate-pulse">&bull;</span>
-          BOOKING
-          <span class="text-gold animate-pulse">&bull;</span>
+          BOOK SESSION
         </span>
       </button>
     </div>
 
-    <!-- Luxury Metrics Bar to fill space and add trust credentials -->
+    <!-- Luxury Pill-Shaped Glass Badges to fill vertical space -->
     <div 
       id="hero-metrics"
-      class="mt-12 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 opacity-0 transform translate-y-4 text-white/40 text-[9px] md:text-[10px] font-montserrat tracking-[0.25em] uppercase select-none font-medium"
+      class="mt-12 md:mt-16 grid grid-cols-1 gap-3 max-w-[260px] mx-auto sm:max-w-none sm:flex sm:flex-row sm:items-center sm:justify-center sm:gap-6 opacity-0 transform translate-y-4 text-white/60 text-[9px] md:text-[10px] font-montserrat tracking-[0.2em] uppercase select-none font-medium"
     >
-      <span class="flex items-center gap-2">
-        <span class="text-gold">&bull;</span> CERTIFIED THERAPISTS
-      </span>
-      <span class="hidden sm:inline text-white/10">|</span>
-      <span class="flex items-center gap-2">
-        <span class="text-gold">&bull;</span> 100% ORGANIC OILS
-      </span>
-      <span class="hidden sm:inline text-white/10">|</span>
-      <span class="flex items-center gap-2">
-        <span class="text-gold">&bull;</span> PRIVATE HAMMAM SUITES
-      </span>
+      <div class="px-4 py-2 rounded-full border border-gold/15 bg-gold/5 backdrop-blur-[2px] flex items-center justify-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+        <span>Certified Therapists</span>
+      </div>
+      <div class="px-4 py-2 rounded-full border border-rose/15 bg-rose/5 backdrop-blur-[2px] flex items-center justify-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-light animate-pulse"></span>
+        <span>100% Organic Oils</span>
+      </div>
+      <div class="px-4 py-2 rounded-full border border-gold/15 bg-gold/5 backdrop-blur-[2px] flex items-center justify-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+        <span>Private Suites</span>
+      </div>
     </div>
 
   </div>
@@ -275,7 +270,7 @@
         duration: 0.5,
         ease: 'power2.out'
       }, '-=0.2')
-      // Fade in the luxury metrics bar to fill the space
+      // Fade in the luxury metrics pill badges
       .to('#hero-metrics', {
         opacity: 1,
         y: 0,
