@@ -8,14 +8,14 @@
     <canvas id="hero-canvas" class="w-full h-full block opacity-0 transition-opacity duration-1000"></canvas>
   </div>
   
-  <!-- Subtle Vignette & Dark Overlay for Text Legibility -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/65 z-10 pointer-events-none"></div>
+  <!-- Solid Black Overlay for Text Legibility and Contrast -->
+  <div class="absolute inset-0 bg-black/60 z-10 pointer-events-none"></div>
 
   <!-- Hero Content Overlay (Tagline, Subtext & Booking) -->
   <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20 md:mt-28" id="hero-content">
     
-    <!-- Animated taglines (Mobile-first stacked flex, desktop horizontal inline) -->
-    <h2 class="text-2xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.22em] font-semibold text-white leading-tight mb-4 md:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-0" id="hero-banner-title">
+    <!-- Animated taglines (Mobile-first stacked flex, desktop horizontal inline, bold layout) -->
+    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.22em] font-semibold text-white leading-none mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0" id="hero-banner-title">
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4">RELAX.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-rose-light">REJUVENATE.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-gold">RENEW.</span>
