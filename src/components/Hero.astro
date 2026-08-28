@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="relative w-full h-[90vh] md:h-screen flex flex-col items-center justify-center overflow-hidden bg-black select-none" id="hero-section">
+<section class="relative w-full h-[95vh] md:h-screen flex flex-col items-center justify-center overflow-hidden bg-black select-none" id="hero-section">
   
   <!-- Full-Screen 3D Parallax Canvas -->
   <div class="absolute inset-0 z-0">
@@ -9,17 +9,25 @@
   </div>
   
   <!-- Subtle Vignette & Dark Overlay for Text Legibility -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/60 z-10 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/65 z-10 pointer-events-none"></div>
 
-  <!-- Hero Content Overlay (Tagline & Booking) -->
-  <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20" id="hero-content">
+  <!-- Hero Content Overlay (Tagline, Subtext & Booking) -->
+  <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-24 md:mt-28" id="hero-content">
     
     <!-- Animated taglines (Mobile-first stacked flex, desktop horizontal inline) -->
-    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.2em] font-semibold text-white leading-tight mb-8 md:mb-12 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0" id="hero-banner-title">
+    <h2 class="text-3xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.2em] font-semibold text-white leading-tight mb-4 md:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0" id="hero-banner-title">
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4">RELAX.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-rose-light">REJUVENATE.</span>
       <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-gold">RENEW.</span>
     </h2>
+
+    <!-- Poetic Spa Description subtext for business identity -->
+    <p 
+      id="hero-subtext"
+      class="text-[9px] md:text-xs font-montserrat uppercase tracking-[0.22em] text-white/60 max-w-[280px] md:max-w-md mx-auto mb-8 md:mb-12 leading-relaxed font-light drop-shadow opacity-0 transform translate-y-4"
+    >
+      Indulge in certified body massages, traditional hot stone rituals, and signature hammam therapies in Hyderabad.
+    </p>
 
     <!-- Glowing booking button (Cyan-Blue theme matching the pool) -->
     <div class="opacity-0 transform translate-y-6" id="hero-booking-container">
@@ -201,7 +209,7 @@
     introAnimation() {
       const tl = gsap.timeline();
 
-      // Words come one-by-one instantly (faster, snappier loading times)
+      // Tagline words appear one-by-one
       tl.to('.hero-word:nth-child(1)', {
         opacity: 1,
         y: 0,
@@ -235,13 +243,20 @@
         scale: 1.0,
         duration: 0.1
       })
+      // Fade in the new poetic subtext description
+      .to('#hero-subtext', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, '-=0.1')
       // Fade and slide booking button up
       .to('#hero-booking-container', {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power2.out'
-      }, '-=0.15');
+      }, '-=0.2');
     }
   }
 
