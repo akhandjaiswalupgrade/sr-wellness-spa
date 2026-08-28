@@ -14,11 +14,11 @@
   <!-- Hero Content Overlay (Tagline & Booking) -->
   <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center mt-20" id="hero-content">
     
-    <!-- Animated taglines word by word -->
-    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.2em] font-semibold text-white leading-tight mb-8 md:mb-12 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]" id="hero-banner-title">
-      <span class="hero-word opacity-0 inline-block transform translate-y-4">RELAX.</span>
-      <span class="hero-word opacity-0 inline-block transform translate-y-4 ml-3 md:ml-6 text-rose-light">REJUVENATE.</span>
-      <span class="hero-word opacity-0 inline-block transform translate-y-4 ml-3 md:ml-6 text-gold">RENEW.</span>
+    <!-- Animated taglines (Mobile-first stacked flex, desktop horizontal inline) -->
+    <h2 class="text-3.5xl md:text-6xl lg:text-7.5xl font-playfair tracking-[0.2em] font-semibold text-white leading-tight mb-8 md:mb-12 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0" id="hero-banner-title">
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4">RELAX.</span>
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-rose-light">REJUVENATE.</span>
+      <span class="hero-word opacity-0 block md:inline-block transform translate-y-4 md:ml-6 text-gold">RENEW.</span>
     </h2>
 
     <!-- Glowing booking button (Cyan-Blue theme matching the pool) -->
@@ -109,7 +109,6 @@
     }
 
     init() {
-      // Restore the widescreen 16:9 pool and cityscape image
       this.textureLoader.load('/assets/hero-bg.jpg', (texture) => {
         texture.minFilter = THREE.LinearFilter;
         texture.generateMipmaps = false;
@@ -202,45 +201,47 @@
     introAnimation() {
       const tl = gsap.timeline();
 
+      // Words come one-by-one instantly (faster, snappier loading times)
       tl.to('.hero-word:nth-child(1)', {
         opacity: 1,
         y: 0,
-        scale: 1.1,
-        duration: 0.6,
-        ease: 'back.out(2)'
+        scale: 1.05,
+        duration: 0.35,
+        ease: 'power2.out'
       })
       .to('.hero-word:nth-child(1)', {
         scale: 1.0,
-        duration: 0.15
+        duration: 0.1
       })
       .to('.hero-word:nth-child(2)', {
         opacity: 1,
         y: 0,
-        scale: 1.1,
-        duration: 0.6,
-        ease: 'back.out(2)'
-      }, '+=0.1')
+        scale: 1.05,
+        duration: 0.35,
+        ease: 'power2.out'
+      }, '+=0.05')
       .to('.hero-word:nth-child(2)', {
         scale: 1.0,
-        duration: 0.15
+        duration: 0.1
       })
       .to('.hero-word:nth-child(3)', {
         opacity: 1,
         y: 0,
-        scale: 1.1,
-        duration: 0.6,
-        ease: 'back.out(2)'
-      }, '+=0.1')
+        scale: 1.05,
+        duration: 0.35,
+        ease: 'power2.out'
+      }, '+=0.05')
       .to('.hero-word:nth-child(3)', {
         scale: 1.0,
-        duration: 0.15
+        duration: 0.1
       })
+      // Fade and slide booking button up
       .to('#hero-booking-container', {
         opacity: 1,
         y: 0,
-        duration: 1.0,
-        ease: 'power3.out'
-      }, '-=0.3');
+        duration: 0.6,
+        ease: 'power2.out'
+      }, '-=0.15');
     }
   }
 

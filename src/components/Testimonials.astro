@@ -93,16 +93,16 @@ const reviews = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Fade and slide in reviews staggeringly
+    // Fast snappy reveal for reviews
     gsap.from('[id^="rev-card-"]', {
       opacity: 0,
-      y: 40,
-      duration: 0.8,
-      stagger: 0.12,
+      y: 15,
+      duration: 0.45,
+      stagger: 0.06,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: '#testimonials',
-        start: 'top 75%',
+        start: 'top 80%',
       }
     });
   });

@@ -114,17 +114,17 @@ const vouchers = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Stagger fade-in of cards
+    // Stagger fade-in of cards snappily
     gsap.from('.voucher-card', {
       opacity: 0,
-      y: 45,
-      scale: 0.96,
-      duration: 0.9,
-      stagger: 0.15,
+      y: 15,
+      scale: 0.98,
+      duration: 0.45,
+      stagger: 0.08,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: '#vouchers-section',
-        start: 'top 75%',
+        start: 'top 80%',
       }
     });
 

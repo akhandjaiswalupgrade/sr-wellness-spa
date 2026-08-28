@@ -108,22 +108,24 @@
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Fade in text from left
+    // Fast snappy vertical fade in for content
     gsap.from('#about-content', {
       opacity: 0,
-      x: -40,
-      duration: 1,
+      y: 15,
+      duration: 0.5,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: '#about',
         start: 'top 75%',
       }
     });
 
-    // Fade in image from right
+    // Fast snappy vertical fade in for visual
     gsap.from('#about-visual', {
       opacity: 0,
-      x: 40,
-      duration: 1,
+      y: 15,
+      duration: 0.5,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: '#about',
         start: 'top 75%',

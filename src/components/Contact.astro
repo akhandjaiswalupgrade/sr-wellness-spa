@@ -138,25 +138,27 @@
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Slide map from left
+    // Fast vertical fade in for map
     gsap.from('#contact-map', {
       opacity: 0,
-      x: -30,
-      duration: 1.2,
+      y: 15,
+      duration: 0.5,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: '#contact',
-        start: 'top 75%',
+        start: 'top 80%',
       }
     });
 
-    // Slide contact info from right
+    // Fast vertical fade in for contact info
     gsap.from('#contact-info', {
       opacity: 0,
-      x: 30,
-      duration: 1.2,
+      y: 15,
+      duration: 0.5,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: '#contact',
-        start: 'top 75%',
+        start: 'top 80%',
       }
     });
 

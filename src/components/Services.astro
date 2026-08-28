@@ -124,17 +124,17 @@ const services = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Fade and scale up service elements gently as they scroll into view
+    // Fast, crisp fade-ins for the service cards
     gsap.from('[id^="service-card-"]', {
       opacity: 0,
-      y: 40,
-      scale: 0.96,
-      duration: 0.8,
-      stagger: 0.12,
+      y: 15,
+      scale: 0.98,
+      duration: 0.45,
+      stagger: 0.06,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: '#services-section',
-        start: 'top 75%',
+        start: 'top 80%',
       }
     });
   });
