@@ -1,0 +1,107 @@
+---
+const standards = [
+  {
+    title: "Fresh Sanitized Towels",
+    desc: "Medical-grade steam sterilized and vacuum-sealed towels opened exclusively in front of you.",
+    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+  },
+  {
+    title: "Post-Session Disinfection",
+    desc: "Every therapy suite undergoes a rigorous 15-minute chemical sanitization immediately after every guest departure.",
+    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+  },
+  {
+    title: "Single-Use Sheets & Robes",
+    desc: "100% disposable sheets, face-cushion guards, and massage slippers to eliminate cross-contamination.",
+    icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+  },
+  {
+    title: "Sterilized Spa Equipment",
+    desc: "Massage stones, bowls, and tools are disinfected in ultraviolet chambers. Hand sanitizing routines before every touch.",
+    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+  }
+];
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 border-t border-white/5" id="hygiene-section">
+  <!-- Glowing blurs -->
+  <div class="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-rose/5 blur-[140px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-20 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Pure Safety</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Our Focus is on Your Hygiene
+      </h2>
+      <p class="text-xs sm:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+        Your safety is our top priority. We operate under medical-grade sanitation protocols to guarantee a pure wellness sanctuary.
+      </p>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Hygiene Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 select-none">
+      {standards.map((std, index) => (
+        <div 
+          class="hygiene-card p-6 rounded-2xl glassmorphism border border-white/5 hover:border-gold/25 transition-all duration-500 hover:-translate-y-1 shadow-lg bg-black/40 flex flex-col justify-between"
+          id={`hygiene-card-${index}`}
+        >
+          <div>
+            <!-- Styled Icon Container -->
+            <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={std.icon}></path>
+              </svg>
+            </div>
+            
+            <!-- Title -->
+            <h3 class="text-base sm:text-lg font-playfair font-medium text-white mb-3">
+              {std.title}
+            </h3>
+            
+            <!-- Description -->
+            <p class="text-xs text-white/60 leading-relaxed font-light font-montserrat">
+              {std.desc}
+            </p>
+          </div>
+
+          <!-- Pulsing Status indicator at bottom -->
+          <div class="flex items-center gap-2 mt-6 pt-4 border-t border-white/5">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-[9px] font-montserrat font-semibold tracking-wider text-white/40 uppercase">Verified Safe</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth < 768;
+
+    gsap.from('.hygiene-card', {
+      opacity: 0,
+      y: 15,
+      duration: 0.45,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: isMobile ? null : {
+        trigger: '#hygiene-section',
+        start: 'top 80%',
+      }
+    });
+  });
+
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
+</script>

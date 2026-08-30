@@ -1,0 +1,81 @@
+---
+---
+
+<section class="py-20 md:py-28 px-4 md:px-8 bg-black relative z-20 border-t border-white/5" id="footer-banner-section">
+  <!-- Interactive radial background gradient -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[160px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto text-center relative z-10 select-none">
+    
+    <!-- Gold Subtitle -->
+    <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-4 font-bold drop-shadow">
+      Your Healing Journey Begins Here
+    </span>
+    
+    <!-- Title -->
+    <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide leading-tight mb-6">
+      Are You Ready to Book Your Session?
+    </h2>
+    
+    <!-- Description -->
+    <p class="text-xs sm:text-sm text-white/70 font-montserrat font-light mb-12 max-w-xl mx-auto leading-relaxed">
+      Escape the noise and exhaustion. Step into Hitec City's premium wellness sanctuary. Experience certified structural therapies, private hammam suites, and custom pressure sessions designed to restore your vitality.
+    </p>
+
+    <!-- 3 Action Paths matching top-level conversion -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 max-w-lg mx-auto">
+      <!-- 1. Book Online Modal -->
+      <button 
+        class="open-booking-btn px-8 py-3.5 rounded-full font-montserrat font-bold tracking-[0.2em] text-xs text-black bg-gradient-to-r from-gold via-gold-light to-gold-dark hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_15px_rgba(212,175,55,0.25)] uppercase text-center"
+      >
+        Book Online
+      </button>
+      
+      <!-- 2. WhatsApp Direct Chat -->
+      <a 
+        href="https://wa.me/919030069708" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-8 py-3.5 rounded-full border border-green-500/40 hover:border-green-500 hover:bg-green-500/5 font-montserrat font-bold tracking-[0.2em] text-xs text-green-400 uppercase transition-all duration-300 flex items-center justify-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        WhatsApp Us
+      </a>
+
+      <!-- 3. Call Reception -->
+      <a 
+        href="tel:+919030069708" 
+        class="px-8 py-3.5 rounded-full border border-gold/40 hover:border-gold hover:bg-gold/5 font-montserrat font-bold tracking-[0.2em] text-xs text-gold uppercase transition-all duration-300 text-center"
+      >
+        Call Reception
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth < 768;
+
+    gsap.from('#footer-banner-section .max-w-4xl', {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: isMobile ? null : {
+        trigger: '#footer-banner-section',
+        start: 'top 85%',
+      }
+    });
+  });
+
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
+</script>

@@ -2,9 +2,9 @@
 const services = [
   {
     num: "1",
-    title: "Ayurvedic Harmony Massage",
+    title: "Swedish Aromatherapy",
     image: "/assets/service-1.jpg",
-    desc: "A warm, sensory journey utilizing traditional brass oil lamps and flowing custom herbal oils to balance your doshas and melt stress.",
+    desc: "A classic full-body relaxation massage using long, gliding strokes and custom organic essential oils to calm the nervous system and dissolve daily stress.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
     border: "border-gold/20 hover:border-gold/50"
   },
@@ -12,41 +12,65 @@ const services = [
     num: "2",
     title: "Deep Tissue Therapeutic",
     image: "/assets/service-2.jpg",
-    desc: "Targeted release of chronic muscle tension. We map your body's pressure points to alleviate deep soreness and restore mobility.",
+    desc: "Intense pressure targeting chronic muscle knots and myofascial tension. Designed to relieve deep-seated back pain, shoulder stiffness, and fatigue.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
     border: "border-rose/20 hover:border-rose/50"
   },
   {
     num: "3",
-    title: "Hot Stone Ritual",
+    title: "Traditional Thai Massage",
     image: "/assets/service-3.jpg",
-    desc: "Polished black river stones are heated and placed on key energy centers. The radiating heat penetrates deep into muscles for ultimate relaxation.",
+    desc: "An energizing ritual combining passive stretching and acupressure. Restores energy flow, improves joint flexibility, and aligns body dynamics.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
     border: "border-gold/20 hover:border-gold/50"
   },
   {
     num: "4",
-    title: "Anti-Aging Gold Facial",
+    title: "Balinese Ritual",
     image: "/assets/service-4.jpg",
-    desc: "An opulent skin treatment utilizing a gilded 3D gold facial mask. Promotes collagen synthesis, firms skin, and yields a luminous complexion.",
+    desc: "A holistic therapy combining gentle stretching, acupressure, and warm coconut oils to boost blood circulation and yield a deep sense of calm.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
     border: "border-rose/20 hover:border-rose/50"
   },
   {
     num: "5",
-    title: "Couples Serenity Package",
+    title: "Aromatherapy Massage",
     image: "/assets/service-5.jpg",
-    desc: "Two intertwined souls, sharing a side-by-side therapeutic escape. Guided relaxation set in our private suite with a soft ambient glow.",
+    desc: "Bespoke sensory escape combining gentle rhythmic strokes with customized floral extracts (lavender, lemongrass) to quiet the mind.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
     border: "border-gold/20 hover:border-gold/50"
   },
   {
     num: "6",
-    title: "Turkish Hammam",
+    title: "Foot Reflexology",
     image: "/assets/service-6.jpg",
-    desc: "A classical purification ritual centered around a marble fountain. Includes a warm stone rest, kessa glove exfoliation, and foam massage.",
+    desc: "Stimulation of specific pressure points on the soles of your feet corresponding to bodily organs, instantly relieving systemic fatigue.",
     glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
     border: "border-rose/20 hover:border-rose/50"
+  },
+  {
+    num: "7",
+    title: "Body Scrub & Polish",
+    image: "/assets/service-1.jpg",
+    desc: "Exfoliating brown sugar and sea salt scrub applied to remove dead skin cells, followed by a light moisturizing milk wash for glowing skin.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
+    border: "border-gold/20 hover:border-gold/50"
+  },
+  {
+    num: "8",
+    title: "Detoxifying Body Wrap",
+    image: "/assets/service-2.jpg",
+    desc: "A warm, nutrient-rich herbal clay envelope applied to the body to extract toxins, hydrate the epidermis, and firm skin contours.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(236,72,153,0.25)]",
+    border: "border-rose/20 hover:border-rose/50"
+  },
+  {
+    num: "9",
+    title: "Couples Serenity Suite",
+    image: "/assets/service-5.jpg",
+    desc: "Enjoy side-by-side relaxation with your partner in our private couples suite, featuring warm essential oils, steam bath, and dual massage beds.",
+    glow: "group-hover:opacity-60 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.25)]",
+    border: "border-gold/20 hover:border-gold/50"
   }
 ];
 ---
@@ -66,7 +90,7 @@ const services = [
       <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
     </div>
 
-    <!-- Floating Grid (No bounding cards, just floating assets) -->
+    <!-- Floating Grid (No bounding cards, 3x3 layout) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 md:gap-y-24">
       {services.map((service, index) => (
         <div 

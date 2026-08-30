@@ -1,0 +1,119 @@
+---
+const benefits = [
+  {
+    title: "Stress & Anxiety Reduction",
+    desc: "Lowers your body's cortisol levels while triggering the release of serotonin to calm mental chatter and restore peace."
+  },
+  {
+    title: "Muscle Pain & Tension Relief",
+    desc: "Direct pressure releases tight myofascial knots, alleviating chronic lower back ache, neck tension, and shoulder stiffness."
+  },
+  {
+    title: "Improved Blood Circulation",
+    desc: "Enhances the flow of oxygen and nutrients to vital organs and muscle tissues, speeding up cell regeneration."
+  },
+  {
+    title: "Deeper Sleep Quality",
+    desc: "Promotes the transition into delta sleep waves (deep rest), resolving insomnia and daytime exhaustion."
+  },
+  {
+    title: "Enhanced Joint Flexibility",
+    desc: "Stretches muscle fibers and connective tissues, releasing accumulated toxins and expanding your active range of motion."
+  },
+  {
+    title: "Immune System Support",
+    desc: "Boosts white blood cell count (lymphocytes), reinforcing your body's natural defense against seasonal illness."
+  },
+  {
+    title: "Mental Clarity & Alertness",
+    desc: "Alleviates physical exhaustion, reducing neurological stress and clearing brain fog for enhanced daily focus."
+  },
+  {
+    title: "Tension Headache Relief",
+    desc: "Releases static contractions in the neck, scalp, and jaw muscles, significantly reducing chronic tension headaches."
+  }
+];
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 border-t border-white/5" id="benefits-section">
+  <!-- Interactive radial background gradient -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gold/5 blur-[200px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-20 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Holistic Science</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Why Body Massage is Needed
+      </h2>
+      <p class="text-xs sm:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+        Beyond pampering, regular body massage is essential maintenance to restore biological balance and support peak performance.
+      </p>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Benefits Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 mb-16 select-none">
+      {benefits.map((ben, index) => (
+        <div 
+          class="benefit-item flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-300"
+          id={`benefit-item-${index}`}
+        >
+          <!-- Gold Check Icon -->
+          <div class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5 border border-gold/30">
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          
+          <div>
+            <h3 class="text-sm sm:text-base font-playfair font-semibold text-white mb-2">
+              {ben.title}
+            </h3>
+            <p class="text-xs text-white/60 leading-relaxed font-light font-montserrat">
+              {ben.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Final Call to Action inside Section -->
+    <div class="text-center select-none animate-fade-in">
+      <button 
+        class="open-booking-btn px-10 py-3.5 rounded-full font-montserrat font-bold tracking-[0.2em] text-xs text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300 shadow-md shadow-gold/10"
+      >
+        Book Your Session Now
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth < 768;
+
+    gsap.from('.benefit-item', {
+      opacity: 0,
+      y: 15,
+      duration: 0.45,
+      stagger: 0.06,
+      ease: 'power2.out',
+      scrollTrigger: isMobile ? null : {
+        trigger: '#benefits-section',
+        start: 'top 80%',
+      }
+    });
+  });
+
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
+</script>

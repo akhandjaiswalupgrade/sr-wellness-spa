@@ -5,12 +5,17 @@ import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Philosophy from '../components/Philosophy.astro';
 import Services from '../components/Services.astro';
+import Packages from '../components/Packages.astro';
+import PressureSelector from '../components/PressureSelector.astro';
 import Signature from '../components/Signature.astro';
 import Vouchers from '../components/Vouchers.astro';
 import Testimonials from '../components/Testimonials.astro';
+import Hygiene from '../components/Hygiene.astro';
+import Benefits from '../components/Benefits.astro';
 import Gallery from '../components/Gallery.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
+import FooterBanner from '../components/FooterBanner.astro';
 import BookingModal from '../components/BookingModal.astro';
 ---
 
@@ -59,6 +64,26 @@ import BookingModal from '../components/BookingModal.astro';
       <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
     </div>
 
+    <!-- Signature Packages Pricing Grid -->
+    <div id="packages" class="scroll-mt-24">
+      <Packages />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Interactive Pressure Selector Picker -->
+    <div id="pressure" class="scroll-mt-24">
+      <PressureSelector />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
     <!-- Signature Aura Cleansing Showcase -->
     <div id="signature" class="scroll-mt-24">
       <Signature />
@@ -89,6 +114,26 @@ import BookingModal from '../components/BookingModal.astro';
       <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
     </div>
 
+    <!-- Pure Safety Hygiene Standards -->
+    <div id="hygiene" class="scroll-mt-24">
+      <Hygiene />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Science of Massage Benefits Grid -->
+    <div id="benefits" class="scroll-mt-24">
+      <Benefits />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
     <!-- Teardrop Symmetrical Gallery & Fluid Water shader -->
     <div id="gallery" class="scroll-mt-24">
       <Gallery />
@@ -112,6 +157,16 @@ import BookingModal from '../components/BookingModal.astro';
     <!-- Dark Map & Business Contacts -->
     <div id="contact" class="scroll-mt-24">
       <Contact />
+    </div>
+
+    <!-- Fading Gold Divider -->
+    <div class="w-full flex justify-center py-6 select-none opacity-20">
+      <div class="h-[1px] w-48 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    </div>
+
+    <!-- Footer Conversion Banner -->
+    <div id="footer-banner">
+      <FooterBanner />
     </div>
   </main>
 

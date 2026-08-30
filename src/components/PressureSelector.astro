@@ -1,0 +1,185 @@
+---
+const options = [
+  {
+    id: "soft",
+    title: "Soft & Gentle",
+    intensity: "Light Pressure",
+    desc: "Long flowing, rhythmic strokes to calm the nervous system and encourage lymphatic drainage. Recommended for deep stress relief and first-time guests.",
+    recommended: "Swedish, Aromatherapy, Foot Reflexology",
+    border: "group-[.active]:border-gold/60 border-white/5",
+    glow: "shadow-[0_0_20px_rgba(212,175,55,0.02)]"
+  },
+  {
+    id: "medium",
+    title: "Medium & Firm",
+    intensity: "Moderate Pressure",
+    desc: "A balanced blend of muscle rubbing, gentle stretching, and firm strokes to alleviate stiffness, release knots, and improve blood circulation.",
+    recommended: "Balinese, Ayurvedic Massage, Scrub & Polish",
+    border: "group-[.active]:border-rose/60 border-white/5",
+    glow: "shadow-[0_0_25px_rgba(236,72,153,0.03)]"
+  },
+  {
+    id: "deep",
+    title: "Deep & Strong",
+    intensity: "Intense Pressure",
+    desc: "Deep, slow structural strokes targeting localized myofascial knots and muscle tightness. Essential for chronic back stiffness and athletic recovery.",
+    recommended: "Deep Tissue, Traditional Thai, Turkish Hammam",
+    border: "group-[.active]:border-gold/60 border-white/5",
+    glow: "shadow-[0_0_30px_rgba(212,175,55,0.05)]"
+  },
+  {
+    id: "trigger",
+    title: "Trigger Points",
+    intensity: "Focused Pressure",
+    desc: "Localized static pressure applied specifically to hyper-irritable muscle points to release radiating nerve pain and restore muscle length.",
+    recommended: "Targeted Back & Neck Massage, Reflexology",
+    border: "group-[.active]:border-rose/60 border-white/5",
+    glow: "shadow-[0_0_25px_rgba(236,72,153,0.03)]"
+  },
+  {
+    id: "custom",
+    title: "Customized Blend",
+    intensity: "Bespoke Pressure",
+    desc: "An adaptive, personalized sequence tailored during the session based on your real-time anatomical feedback and pain thresholds.",
+    recommended: "Signature Wellness Packages, Couples Suite",
+    border: "group-[.active]:border-gold/60 border-white/5",
+    glow: "shadow-[0_0_30px_rgba(212,175,55,0.05)]"
+  }
+];
+---
+
+<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 border-t border-white/5" id="pressure-section">
+  <!-- Interactive radial background gradient -->
+  <div class="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[160px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-20 md:mb-28 select-none">
+      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Therapy Fit</span>
+      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+        Which Therapy Suits You?
+      </h2>
+      <p class="text-xs sm:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+        Identify the ideal muscle pressure depth for your session. Click any card below to select your customized relaxation profile.
+      </p>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Pressure Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 items-stretch">
+      {options.map((opt) => (
+        <div 
+          class="pressure-card group relative p-6 rounded-2xl bg-black/40 border hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col justify-between select-none"
+          data-id={opt.id}
+          data-title={opt.title}
+        >
+          <!-- Active State Border Indicator -->
+          <div class="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300 opacity-0 group-[.active]:opacity-100 group-[.active]:border-gold pointer-events-none"></div>
+
+          <div>
+            <!-- Intensity -->
+            <span class="text-[9px] font-montserrat text-gold-dark/80 font-bold block mb-1 uppercase tracking-widest">
+              {opt.intensity}
+            </span>
+            <!-- Title -->
+            <h3 class="text-lg font-playfair font-semibold text-white mb-4 group-[.active]:text-gold transition-colors duration-300">
+              {opt.title}
+            </h3>
+            <!-- Description -->
+            <p class="text-[11px] text-white/60 leading-relaxed font-light font-montserrat mb-6">
+              {opt.desc}
+            </p>
+          </div>
+
+          <div>
+            <!-- Recommended list -->
+            <div class="border-t border-white/5 pt-4">
+              <span class="text-[8px] font-montserrat text-white/40 block mb-1 uppercase tracking-wider">Recommended:</span>
+              <span class="text-[10px] font-montserrat font-medium text-white/80">{opt.recommended}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Dynamic CTA Banner (Shows selected tier feedback) -->
+    <div class="mt-16 max-w-2xl mx-auto text-center select-none" id="pressure-feedback-banner">
+      <div class="glassmorphism border border-white/5 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div class="text-left">
+          <span class="text-[10px] font-montserrat font-bold text-gold uppercase tracking-widest block mb-1">Your Selection</span>
+          <h4 class="text-lg font-playfair font-semibold text-white" id="selected-pressure-text">
+            Please select a pressure depth above...
+          </h4>
+        </div>
+        
+        <button 
+          id="pressure-book-btn"
+          disabled
+          class="open-booking-btn px-8 py-3 rounded-full font-montserrat font-bold tracking-[0.2em] text-[10px] text-black bg-gold/50 uppercase cursor-not-allowed transition-all duration-300"
+        >
+          Book Selection
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth < 768;
+
+    // Reveal Grid
+    gsap.from('.pressure-card', {
+      opacity: 0,
+      y: 15,
+      duration: 0.45,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: isMobile ? null : {
+        trigger: '#pressure-section',
+        start: 'top 80%',
+      }
+    });
+
+    // Select behavior
+    const cards = document.querySelectorAll('.pressure-card');
+    const feedbackText = document.getElementById('selected-pressure-text');
+    const bookBtn = document.getElementById('pressure-book-btn') as HTMLButtonElement;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Clear all active classes
+        cards.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked card
+        card.classList.add('active');
+        
+        const title = card.getAttribute('data-title') || '';
+        
+        // Update feedback message
+        if (feedbackText) {
+          feedbackText.innerText = `${title} Profile`;
+        }
+
+        // Enable Booking Button
+        if (bookBtn) {
+          bookBtn.disabled = false;
+          bookBtn.classList.remove('bg-gold/50', 'cursor-not-allowed');
+          bookBtn.classList.add('bg-gold', 'hover:bg-gold-light', 'shadow-md', 'shadow-gold/15');
+          bookBtn.setAttribute('data-treatment', `Custom Therapy: ${title}`);
+        }
+      });
+    });
+  });
+
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
+</script>
