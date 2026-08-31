@@ -2,23 +2,24 @@
 ---
 
 <!-- Fixed Luxury Top Navigation Bar (Visible by default on first load) -->
-<header id="main-navbar" class="fixed top-0 left-0 w-full z-40 bg-black/60 backdrop-blur-md border-b border-white/5 transition-all duration-500 py-3.5 px-4 md:px-8 select-none">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
+<header id="main-navbar" class="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/10 transition-all duration-500 py-3 px-4 sm:px-6 md:px-8 select-none">
+  <div class="w-full max-w-6xl mx-auto flex items-center justify-between">
     
     <!-- Left: Brand Logo -->
-    <a href="/" class="flex items-center gap-3 group">
+    <a href="/" class="flex items-center gap-2 group shrink-0">
       <img 
         src="/assets/new-logo.png" 
         alt="Shirui Wellness Spa Logo" 
-        class="h-10 sm:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+        class="h-9 sm:h-11 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
       />
     </a>
 
     <!-- Center: Desktop Navigation Links (Visible on Desktop) -->
-    <nav class="hidden lg:flex items-center gap-8 text-xs font-montserrat tracking-[0.2em] uppercase font-medium">
+    <nav class="hidden lg:flex items-center gap-7 text-xs font-montserrat tracking-[0.18em] uppercase font-medium">
       <a href="#about" class="text-white/75 hover:text-gold transition-colors duration-300">About</a>
       <a href="#services" class="text-white/75 hover:text-gold transition-colors duration-300">Treatments</a>
       <a href="#packages" class="text-white/75 hover:text-gold transition-colors duration-300">Packages</a>
+      <a href="#pressure" class="text-white/75 hover:text-gold transition-colors duration-300">Therapy Selector</a>
       <a href="#philosophy" class="text-white/75 hover:text-gold transition-colors duration-300">Philosophy</a>
       <a href="#testimonials" class="text-white/75 hover:text-gold transition-colors duration-300">Reviews</a>
       <a href="#faq" class="text-white/75 hover:text-gold transition-colors duration-300">FAQ</a>
@@ -26,7 +27,7 @@
     </nav>
 
     <!-- Right: Desktop CTA Buttons (Visible on Desktop) -->
-    <div class="hidden sm:flex items-center gap-3">
+    <div class="hidden sm:flex items-center gap-3 shrink-0">
       <a 
         href="tel:+919030069708" 
         class="px-4 py-2 rounded-full border border-gold/30 hover:border-gold hover:bg-gold/5 font-montserrat font-bold tracking-[0.15em] text-[10px] text-gold uppercase transition-all duration-300 whitespace-nowrap"
@@ -41,10 +42,10 @@
     </div>
 
     <!-- Mobile Right: Hamburger Menu Trigger -->
-    <div class="flex lg:hidden items-center gap-2">
+    <div class="flex lg:hidden items-center gap-2 shrink-0">
       <button 
         id="mobile-menu-btn" 
-        class="text-gold p-2 rounded-lg border border-gold/20 hover:border-gold/50 bg-black/40 hover:bg-gold/10 transition-colors focus:outline-none"
+        class="text-gold p-1.5 rounded-lg border border-gold/30 hover:border-gold bg-black/60 hover:bg-gold/10 transition-colors focus:outline-none flex items-center justify-center"
         aria-label="Open Navigation Menu"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +81,7 @@
   </div>
 
   <!-- Center Navigation Links -->
-  <nav class="flex flex-col items-center gap-6 my-auto text-base font-montserrat tracking-[0.25em] uppercase font-light text-white">
+  <nav class="flex flex-col items-center gap-5 my-auto text-sm font-montserrat tracking-[0.22em] uppercase font-light text-white">
     <a href="#about" class="drawer-link hover:text-gold transition-colors duration-300">About Us</a>
     <a href="#services" class="drawer-link hover:text-gold transition-colors duration-300">Treatments</a>
     <a href="#packages" class="drawer-link hover:text-gold transition-colors duration-300">Packages</a>
@@ -129,11 +130,11 @@
     // Scroll state change for navbar
     window.addEventListener('scroll', () => {
       if (window.scrollY > 40) {
-        navbar?.classList.add('bg-black/90', 'shadow-xl', 'border-gold/15', 'py-2.5');
-        navbar?.classList.remove('bg-black/60', 'py-3.5');
+        navbar?.classList.add('bg-black/95', 'shadow-xl', 'border-gold/15', 'py-2.5');
+        navbar?.classList.remove('bg-black/80', 'py-3');
       } else {
-        navbar?.classList.remove('bg-black/90', 'shadow-xl', 'border-gold/15', 'py-2.5');
-        navbar?.classList.add('bg-black/60', 'py-3.5');
+        navbar?.classList.remove('bg-black/95', 'shadow-xl', 'border-gold/15', 'py-2.5');
+        navbar?.classList.add('bg-black/80', 'py-3');
       }
     });
 
