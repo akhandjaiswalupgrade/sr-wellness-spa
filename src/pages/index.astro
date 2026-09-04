@@ -27,12 +27,14 @@ import BookingModal from '../components/BookingModal.astro';
   <Hero />
 
   <main class="relative overflow-hidden w-full max-w-full">
-    <!-- Ambient luxury background glow blobs (alternating rose and gold) -->
-    <div class="absolute top-[8%] left-[-10%] w-[350px] h-[350px] bg-rose/5 rounded-full blur-[120px] pointer-events-none z-10"></div>
-    <div class="absolute top-[25%] right-[-10%] w-[400px] h-[400px] bg-gold/5 rounded-full blur-[140px] pointer-events-none z-10"></div>
-    <div class="absolute top-[45%] left-[-15%] w-[450px] h-[450px] bg-rose/5 rounded-full blur-[150px] pointer-events-none z-10"></div>
-    <div class="absolute top-[65%] right-[-10%] w-[350px] h-[350px] bg-gold/5 rounded-full blur-[120px] pointer-events-none z-10"></div>
-    <div class="absolute top-[85%] left-[-10%] w-[400px] h-[400px] bg-rose/5 rounded-full blur-[140px] pointer-events-none z-10"></div>
+    <!-- Ambient luxury background glow blobs (strictly clipped to prevent horizontal scroll) -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute top-[8%] left-[-10%] w-[350px] h-[350px] bg-rose/5 rounded-full blur-[120px]"></div>
+      <div class="absolute top-[25%] right-[-10%] w-[400px] h-[400px] bg-gold/5 rounded-full blur-[140px]"></div>
+      <div class="absolute top-[45%] left-[-15%] w-[450px] h-[450px] bg-rose/5 rounded-full blur-[150px]"></div>
+      <div class="absolute top-[65%] right-[-10%] w-[350px] h-[350px] bg-gold/5 rounded-full blur-[120px]"></div>
+      <div class="absolute top-[85%] left-[-10%] w-[400px] h-[400px] bg-rose/5 rounded-full blur-[140px]"></div>
+    </div>
 
     <!-- About Us Editorial Section -->
     <div id="about" class="scroll-mt-24">

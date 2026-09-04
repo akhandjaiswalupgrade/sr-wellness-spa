@@ -26,7 +26,9 @@ export default {
       },
       fontFamily: {
         playfair: ['"Playfair Display"', 'serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Montserrat', 'sans-serif'],
+        montserrat: ['"Plus Jakarta Sans"', 'Montserrat', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
       backgroundImage: {
         'radial-fade': 'radial-gradient(circle, transparent 20%, #000000 80%)',

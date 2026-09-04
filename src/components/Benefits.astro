@@ -43,35 +43,35 @@ const benefits = [
     
     <!-- Section Heading -->
     <div class="text-center mb-20 select-none">
-      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Holistic Science</span>
-      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+      <span class="text-xs sm:text-sm font-bold tracking-[0.25em] text-gold uppercase block mb-3">Holistic Science</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
         Why Body Massage is Needed
       </h2>
-      <p class="text-xs sm:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+      <p class="text-sm sm:text-base text-white/80 font-normal mt-4 max-w-lg mx-auto">
         Beyond pampering, regular body massage is essential maintenance to restore biological balance and support peak performance.
       </p>
-      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+      <div class="w-20 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-6"></div>
     </div>
 
     <!-- Benefits Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 mb-16 select-none">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 mb-16 select-none">
       {benefits.map((ben, index) => (
         <div 
-          class="benefit-item flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-300"
+          class="benefit-item flex items-start gap-4 p-5 rounded-2xl border border-white/5 hover:border-gold/25 bg-black/40 hover:bg-black/60 transition-all duration-300"
           id={`benefit-item-${index}`}
         >
           <!-- Gold Check Icon -->
-          <div class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5 border border-gold/30">
-            <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-7 h-7 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5 border border-gold/30">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
             </svg>
           </div>
           
           <div>
-            <h3 class="text-sm sm:text-base font-playfair font-semibold text-white mb-2">
+            <h3 class="text-base sm:text-lg font-playfair font-semibold text-white mb-2">
               {ben.title}
             </h3>
-            <p class="text-xs text-white/60 leading-relaxed font-light font-montserrat">
+            <p class="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">
               {ben.desc}
             </p>
           </div>
@@ -82,7 +82,7 @@ const benefits = [
     <!-- Final Call to Action inside Section -->
     <div class="text-center select-none animate-fade-in">
       <button 
-        class="open-booking-btn px-10 py-3.5 rounded-full font-montserrat font-bold tracking-[0.2em] text-xs text-black bg-gold hover:bg-gold-light uppercase transition-all duration-300 shadow-md shadow-gold/10"
+        class="open-booking-btn px-10 py-4 rounded-full font-bold tracking-[0.16em] text-xs sm:text-sm text-black bg-gradient-to-r from-gold via-gold-light to-gold-dark hover:scale-105 uppercase transition-all duration-300 shadow-[0_4px_20px_rgba(212,175,55,0.4)]"
       >
         Book Your Session Now
       </button>

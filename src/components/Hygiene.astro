@@ -31,46 +31,46 @@ const standards = [
     
     <!-- Section Heading -->
     <div class="text-center mb-20 select-none">
-      <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Pure Safety</span>
-      <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
+      <span class="text-xs sm:text-sm font-bold tracking-[0.25em] text-gold uppercase block mb-3">Pure Safety</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
         Our Focus is on Your Hygiene
       </h2>
-      <p class="text-xs sm:text-sm text-white/50 font-montserrat font-light mt-4 max-w-md mx-auto">
+      <p class="text-sm sm:text-base text-white/80 font-normal mt-4 max-w-lg mx-auto">
         Your safety is our top priority. We operate under medical-grade sanitation protocols to guarantee a pure wellness sanctuary.
       </p>
-      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+      <div class="w-20 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-6"></div>
     </div>
 
     <!-- Hygiene Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 select-none">
       {standards.map((std, index) => (
         <div 
-          class="hygiene-card p-6 rounded-2xl glassmorphism border border-white/5 hover:border-gold/25 transition-all duration-500 hover:-translate-y-1 shadow-lg bg-black/40 flex flex-col justify-between"
+          class="hygiene-card p-6 sm:p-7 rounded-2xl glassmorphism border border-white/10 hover:border-gold/35 transition-all duration-500 hover:-translate-y-1 shadow-lg bg-black/50 flex flex-col justify-between"
           id={`hygiene-card-${index}`}
         >
           <div>
             <!-- Styled Icon Container -->
-            <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center mb-6">
+            <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-6">
               <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={std.icon}></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={std.icon}></path>
               </svg>
             </div>
             
             <!-- Title -->
-            <h3 class="text-base sm:text-lg font-playfair font-medium text-white mb-3">
+            <h3 class="text-lg sm:text-xl font-playfair font-semibold text-white mb-3">
               {std.title}
             </h3>
             
             <!-- Description -->
-            <p class="text-xs text-white/60 leading-relaxed font-light font-montserrat">
+            <p class="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">
               {std.desc}
             </p>
           </div>
 
           <!-- Pulsing Status indicator at bottom -->
-          <div class="flex items-center gap-2 mt-6 pt-4 border-t border-white/5">
-            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-            <span class="text-[9px] font-montserrat font-semibold tracking-wider text-white/40 uppercase">Verified Safe</span>
+          <div class="flex items-center gap-2 mt-6 pt-4 border-t border-white/10">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-[11px] font-semibold tracking-wider text-white/70 uppercase">Verified Safe</span>
           </div>
         </div>
       ))}
