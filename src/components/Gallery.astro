@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="py-24 md:py-36 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="gallery-section">
+<section class="pt-20 pb-16 md:pt-28 md:pb-20 px-4 md:px-8 bg-black relative z-20 overflow-hidden border-t border-white/5" id="gallery-section">
   <!-- Interactive Dark Fluid Water Background WebGL Canvas -->
   <div class="absolute inset-0 z-0 opacity-80 pointer-events-none">
     <canvas id="water-canvas" class="w-full h-full block"></canvas>
@@ -13,16 +13,16 @@
   <div class="max-w-6xl mx-auto relative z-20">
     
     <!-- Section Heading -->
-    <div class="text-center mb-16 select-none">
+    <div class="text-center mb-8 md:mb-10 select-none">
       <span class="text-xs font-montserrat tracking-[0.3em] text-gold uppercase block mb-3">Sanctuary Vibe</span>
       <h2 class="text-3xl md:text-5xl font-playfair font-semibold text-white tracking-wide">
         Ambience Gallery
       </h2>
-      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-6"></div>
+      <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-5"></div>
     </div>
 
     <!-- Symmetrical Teardrop / Water-Droplet Gallery Windows (5 Droplets Arch) -->
-    <div class="flex items-center justify-center gap-2.5 md:gap-6 mt-16 md:mt-24 select-none relative h-[300px] md:h-[420px]">
+    <div class="flex items-center justify-center gap-2.5 md:gap-6 mt-6 md:mt-10 select-none relative h-[280px] md:h-[400px]">
       
       <!-- 1. Far Left Droplet (Small) -->
       <div 
@@ -132,31 +132,12 @@
     </div>
 
     <!-- Carousel Indicators -->
-    <div class="flex justify-center items-center gap-3 mt-10 md:mt-16">
-      <button class="w-2.5 h-2.5 rounded-full bg-gold transition-all duration-300" id="carousel-dot-0" aria-label="Slide 1"></button>
-      <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-gold/50 transition-all duration-300" id="carousel-dot-1" aria-label="Slide 2"></button>
+    <div class="flex justify-center items-center gap-3 mt-8 md:mt-12">
+      <button class="w-2.5 h-2.5 rounded-full bg-gold transition-all duration-300 cursor-pointer" id="carousel-dot-0" aria-label="Slide 1"></button>
+      <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-gold/50 transition-all duration-300 cursor-pointer" id="carousel-dot-1" aria-label="Slide 2"></button>
     </div>
 
   </div>
-  
-  <!-- Premium Footer -->
-  <footer class="mt-28 md:mt-40 max-w-6xl mx-auto border-t border-white/10 pt-12 select-none text-center flex flex-col items-center justify-between gap-6 md:flex-row text-white/50 text-xs">
-    <div class="flex items-center gap-3">
-      <span class="text-gold font-playfair font-semibold tracking-widest text-sm">SHIRUI</span>
-      <span>&bull;</span>
-      <span class="font-montserrat text-[10px] tracking-widest uppercase">Hyderabad Sanctuary</span>
-    </div>
-    
-    <p class="font-montserrat">
-      &copy; {new Date().getFullYear()} Shirui Wellness Spa. All rights reserved.
-    </p>
-    
-    <div class="flex items-center gap-6">
-      <a href="#services" class="hover:text-gold transition-colors">Treatments</a>
-      <a href="#philosophy" class="hover:text-gold transition-colors">Philosophy</a>
-      <a href="#booking" class="hover:text-gold transition-colors">Reservations</a>
-    </div>
-  </footer>
 </section>
 
 <script>
