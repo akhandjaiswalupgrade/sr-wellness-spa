@@ -53,29 +53,3 @@
 
   </div>
 </section>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const isMobile = window.innerWidth < 768;
-
-    gsap.from('#footer-banner-section .max-w-4xl', {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: isMobile ? null : {
-        trigger: '#footer-banner-section',
-        start: 'top 85%',
-      }
-    });
-  });
-
-  window.addEventListener('load', () => {
-    ScrollTrigger.refresh();
-  });
-</script>

@@ -105,34 +105,3 @@
     animation: float 6s ease-in-out infinite;
   }
 </style>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // Fade up left side (shell)
-    gsap.from('#sig-left', {
-      opacity: 0,
-      x: -40,
-      duration: 1,
-      scrollTrigger: {
-        trigger: '#signature-section',
-        start: 'top 75%',
-      }
-    });
-
-    // Fade up right side (content & thumbs)
-    gsap.from('#sig-right', {
-      opacity: 0,
-      x: 40,
-      duration: 1,
-      scrollTrigger: {
-        trigger: '#signature-section',
-        start: 'top 75%',
-      }
-    });
-  });
-</script>

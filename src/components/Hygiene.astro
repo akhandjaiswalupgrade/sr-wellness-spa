@@ -78,30 +78,3 @@ const standards = [
 
   </div>
 </section>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const isMobile = window.innerWidth < 768;
-
-    gsap.from('.hygiene-card', {
-      opacity: 0,
-      y: 15,
-      duration: 0.45,
-      stagger: 0.08,
-      ease: 'power2.out',
-      scrollTrigger: isMobile ? null : {
-        trigger: '#hygiene-section',
-        start: 'top 80%',
-      }
-    });
-  });
-
-  window.addEventListener('load', () => {
-    ScrollTrigger.refresh();
-  });
-</script>

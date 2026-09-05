@@ -127,28 +127,7 @@ const options = [
 </section>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
   document.addEventListener('DOMContentLoaded', () => {
-    const isMobile = window.innerWidth < 768;
-
-    // Reveal Grid
-    gsap.from('.pressure-card', {
-      opacity: 0,
-      y: 15,
-      scale: 0.98,
-      duration: 0.45,
-      stagger: 0.06,
-      ease: 'power2.out',
-      scrollTrigger: isMobile ? null : {
-        trigger: '#pressure-section',
-        start: 'top 80%',
-      }
-    });
-
     // Interactive Card Click Handling
     const cards = document.querySelectorAll('.pressure-card');
     const feedbackText = document.getElementById('selected-pressure-text');

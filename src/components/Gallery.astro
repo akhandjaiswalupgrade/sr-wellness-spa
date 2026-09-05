@@ -351,41 +351,5 @@
         intervalId = setInterval(autoPlay, slideDuration);
       });
     });
-
-    // Stagger slide entry animations
-    gsap.from('#droplet-far-left, #droplet-far-right', {
-      opacity: 0,
-      scale: 0.7,
-      duration: 1.4,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#gallery-section',
-        start: 'top 75%',
-      }
-    });
-
-    gsap.from('#droplet-left, #droplet-right', {
-      opacity: 0,
-      scale: 0.82,
-      y: 15,
-      duration: 1.4,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#gallery-section',
-        start: 'top 75%',
-      }
-    });
-
-    gsap.from('#droplet-center', {
-      opacity: 0,
-      scale: 0.95,
-      y: 30,
-      duration: 1.4,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#gallery-section',
-        start: 'top 75%',
-      }
-    });
   });
 </script>
